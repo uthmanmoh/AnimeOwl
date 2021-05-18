@@ -3,23 +3,39 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */; };
-		00AAC63626537B7700BD57EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63526537B7700BD57EA /* ContentView.swift */; };
 		00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63726537B7900BD57EA /* Assets.xcassets */; };
 		00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */; };
+		00AAC64426537BA300BD57EA /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC64326537BA300BD57EA /* Anime.swift */; };
+		00AAC64B26537BBE00BD57EA /* AnimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC64626537BBE00BD57EA /* AnimeModel.swift */; };
+		00AAC64C26537BBE00BD57EA /* AnimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC64726537BBE00BD57EA /* AnimeViewModel.swift */; };
+		00AAC64E26537BBE00BD57EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC64A26537BBE00BD57EA /* ContentView.swift */; };
+		00AAC65626537F4F00BD57EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC65526537F4F00BD57EA /* GoogleService-Info.plist */; };
+		00AAC6582653813400BD57EA /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC6572653813400BD57EA /* LoginForm.swift */; };
+		00AAC65A265382E100BD57EA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC659265382E100BD57EA /* LaunchView.swift */; };
+		9D9E0612C3422745C84A5E87 /* Pods_AnimeOwl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00AAC63026537B7700BD57EA /* AnimeOwl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeOwl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeOwlApp.swift; sourceTree = "<group>"; };
-		00AAC63526537B7700BD57EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		00AAC63726537B7900BD57EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		00AAC63C26537B7900BD57EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00AAC64326537BA300BD57EA /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
+		00AAC64626537BBE00BD57EA /* AnimeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeModel.swift; sourceTree = "<group>"; };
+		00AAC64726537BBE00BD57EA /* AnimeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeViewModel.swift; sourceTree = "<group>"; };
+		00AAC64A26537BBE00BD57EA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		00AAC65526537F4F00BD57EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		00AAC6572653813400BD57EA /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
+		00AAC659265382E100BD57EA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimeOwl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D491E9B5E5A2E402E04AC10 /* Pods-AnimeOwl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.release.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.release.xcconfig"; sourceTree = "<group>"; };
+		B099514FEF3C754AACF689AE /* Pods-AnimeOwl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.debug.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D9E0612C3422745C84A5E87 /* Pods_AnimeOwl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +55,8 @@
 			children = (
 				00AAC63226537B7700BD57EA /* AnimeOwl */,
 				00AAC63126537B7700BD57EA /* Products */,
+				677F6985761A42E1E8AA0D02 /* Pods */,
+				76188B5AB772809A5AEFA632 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,8 +72,11 @@
 			isa = PBXGroup;
 			children = (
 				00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */,
-				00AAC63526537B7700BD57EA /* ContentView.swift */,
+				00AAC64926537BBE00BD57EA /* Views */,
+				00AAC64526537BBE00BD57EA /* ViewModels */,
+				00AAC64226537BA300BD57EA /* Models */,
 				00AAC63726537B7900BD57EA /* Assets.xcassets */,
+				00AAC65526537F4F00BD57EA /* GoogleService-Info.plist */,
 				00AAC63C26537B7900BD57EA /* Info.plist */,
 				00AAC63926537B7900BD57EA /* Preview Content */,
 			);
@@ -69,6 +91,50 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		00AAC64226537BA300BD57EA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				00AAC64326537BA300BD57EA /* Anime.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		00AAC64526537BBE00BD57EA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				00AAC64626537BBE00BD57EA /* AnimeModel.swift */,
+				00AAC64726537BBE00BD57EA /* AnimeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		00AAC64926537BBE00BD57EA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00AAC64A26537BBE00BD57EA /* ContentView.swift */,
+				00AAC6572653813400BD57EA /* LoginForm.swift */,
+				00AAC659265382E100BD57EA /* LaunchView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		677F6985761A42E1E8AA0D02 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B099514FEF3C754AACF689AE /* Pods-AnimeOwl.debug.xcconfig */,
+				5D491E9B5E5A2E402E04AC10 /* Pods-AnimeOwl.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		76188B5AB772809A5AEFA632 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -76,9 +142,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00AAC63F26537B7900BD57EA /* Build configuration list for PBXNativeTarget "AnimeOwl" */;
 			buildPhases = (
+				641A340EF95117B9172264BF /* [CP] Check Pods Manifest.lock */,
 				00AAC62C26537B7700BD57EA /* Sources */,
 				00AAC62D26537B7700BD57EA /* Frameworks */,
 				00AAC62E26537B7700BD57EA /* Resources */,
+				1C7D97685D62F58978AFD479 /* [CP] Embed Pods Frameworks */,
+				C5FC8C1A058B53976E65D1D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00AAC65626537F4F00BD57EA /* GoogleService-Info.plist in Resources */,
 				00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */,
 				00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */,
 			);
@@ -133,13 +203,77 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C7D97685D62F58978AFD479 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		641A340EF95117B9172264BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AnimeOwl-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5FC8C1A058B53976E65D1D2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		00AAC62C26537B7700BD57EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00AAC63626537B7700BD57EA /* ContentView.swift in Sources */,
+				00AAC64C26537BBE00BD57EA /* AnimeViewModel.swift in Sources */,
+				00AAC6582653813400BD57EA /* LoginForm.swift in Sources */,
+				00AAC64E26537BBE00BD57EA /* ContentView.swift in Sources */,
+				00AAC65A265382E100BD57EA /* LaunchView.swift in Sources */,
 				00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */,
+				00AAC64B26537BBE00BD57EA /* AnimeModel.swift in Sources */,
+				00AAC64426537BA300BD57EA /* Anime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +398,7 @@
 		};
 		00AAC64026537B7900BD57EA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B099514FEF3C754AACF689AE /* Pods-AnimeOwl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -286,6 +421,7 @@
 		};
 		00AAC64126537B7900BD57EA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D491E9B5E5A2E402E04AC10 /* Pods-AnimeOwl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
