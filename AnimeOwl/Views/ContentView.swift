@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import FirebaseUI
+import FirebaseAuth
 
 struct ContentView: View {
     
@@ -34,7 +34,7 @@ struct ContentView: View {
             Text("Welcome!")
                 .padding()
             Button(action: {
-                try! FUIAuth.defaultAuthUI()?.signOut()
+                try? Auth.auth().signOut()
                 loggedIn = false
             }) {
                 Text("Sign Out")

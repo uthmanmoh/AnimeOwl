@@ -1,5 +1,5 @@
 //
-//  LoginForm.swift
+//  CreateAccountForm.swift
 //  AnimeOwl
 //
 //  Created by Uthman Mohamed on 2021-05-18.
@@ -8,11 +8,13 @@
 import SwiftUI
 import FirebaseAuth
 
-struct LoginForm: View {
+struct CreateAccountForm: View {
     @Binding var formShowing: Bool
     
     @State private var email = ""
+    @State private var name = ""
     @State private var password = ""
+    
     @State private var errorMessage: String?
     
     var body: some View {
@@ -20,6 +22,7 @@ struct LoginForm: View {
             Form {
                 Section {
                     TextField("Email", text: $email)
+                    TextField("Name", text: $name)
                     SecureField("Password", text: $password)
                 }
                 .autocapitalization(.none)
@@ -32,17 +35,16 @@ struct LoginForm: View {
                 }
                 
                 Button(action: {
-                    signIn()
+                    createAccount()
                 }) {
                     HStack {
                         Spacer()
-                        Text("Sign In")
+                        Text("Create Account")
                         Spacer()
                     }
                 }
             }
-            .background(Color.blue)
-            .navigationBarTitle("Sign In")
+            .navigationBarTitle("Create an Account")
             .navigationBarItems(trailing: Button(action: {
                 formShowing = false
             }) {
@@ -51,8 +53,8 @@ struct LoginForm: View {
         }
     }
     
-    func signIn() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+    func createAccount() {
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
             DispatchQueue.main.async {
                 if let error = error {
                     errorMessage = error.localizedDescription
@@ -65,8 +67,8 @@ struct LoginForm: View {
     
 }
 
-struct LoginForm_Previews: PreviewProvider {
+struct CreateAccountForm_Previews: PreviewProvider {
     static var previews: some View {
-        LoginForm(formShowing: Binding.constant(true))
+        CreateAccountForm(formShowing: Binding.constant(true))
     }
 }
