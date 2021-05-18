@@ -16,39 +16,79 @@ struct LoginForm: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section {
+        ZStack {
+            Rectangle()
+                .ignoresSafeArea()
+                .foregroundColor(Color.init(.sRGB, white: 0.1, opacity: 0.7))
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        formShowing = false
+                    }) {
+                        Image(systemName: "xmark")
+                    }
+                    .padding(.trailing)
+                    .padding(.top, -30)
+                }
+                
+                Text("Sign In")
+                    .padding(.top, 30)
+                    .font(Font.custom("Avenir Heavy", size: 33))
+                    .foregroundColor(.white)
+                
+                
+                OwlLogo()
+                    .padding(.bottom, 50)
+                // MARK: - Login info
+                VStack {
                     TextField("Email", text: $email)
+                        .padding(12)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                     SecureField("Password", text: $password)
+                        .padding(12)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                 }
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 
+                
+                // MARK: - Error Message
                 if let errorMessage = errorMessage {
                     Section {
                         Text(errorMessage)
                     }
                 }
                 
+                
+                // MARK: - Sign In Button
                 Button(action: {
                     signIn()
                 }) {
                     HStack {
                         Spacer()
-                        Text("Sign In")
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(height: 50)
+                                .foregroundColor(Color(.brown))
+                                .padding()
+                            Text("Sign In")
+                                .font(Font.custom("Avenir Heavy", size: 17))
+                                .foregroundColor(.white)
+                        }
+                        .padding(.top)
                         Spacer()
                     }
                 }
+                Spacer()
             }
-            .background(Color.blue)
-            .navigationBarTitle("Sign In")
-            .navigationBarItems(trailing: Button(action: {
-                formShowing = false
-            }) {
-                Image(systemName: "xmark")
-            })
+            .padding(.top, 50)
         }
+        
     }
     
     func signIn() {

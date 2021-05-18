@@ -18,6 +18,7 @@
 		00AAC65A265382E100BD57EA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC659265382E100BD57EA /* LaunchView.swift */; };
 		00AAC65C26538B1F00BD57EA /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC65B26538B1F00BD57EA /* LoginForm.swift */; };
 		00AAC65E26538F7F00BD57EA /* CreateAccountForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */; };
+		00AAC6602653A1CA00BD57EA /* OwlLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */; };
 		9D9E0612C3422745C84A5E87 /* Pods_AnimeOwl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		00AAC659265382E100BD57EA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		00AAC65B26538B1F00BD57EA /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountForm.swift; sourceTree = "<group>"; };
+		00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwlLogo.swift; sourceTree = "<group>"; };
 		0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimeOwl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D491E9B5E5A2E402E04AC10 /* Pods-AnimeOwl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.release.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.release.xcconfig"; sourceTree = "<group>"; };
 		B099514FEF3C754AACF689AE /* Pods-AnimeOwl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.debug.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.debug.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				00AAC64A26537BBE00BD57EA /* ContentView.swift */,
 				00AAC65B26538B1F00BD57EA /* LoginForm.swift */,
 				00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */,
+				00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				00AAC64B26537BBE00BD57EA /* AnimeModel.swift in Sources */,
 				00AAC64426537BA300BD57EA /* Anime.swift in Sources */,
 				00AAC65E26538F7F00BD57EA /* CreateAccountForm.swift in Sources */,
+				00AAC6602653A1CA00BD57EA /* OwlLogo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

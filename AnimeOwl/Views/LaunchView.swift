@@ -28,14 +28,7 @@ struct LaunchView: View {
                         .bold()
                         .font(Font.custom("Avenir Heavy", size: 33))
                         .foregroundColor(Color(.lightText))
-                    ZStack {
-                        Circle()
-                            .frame(width: 200, height: 200)
-                            .foregroundColor(Color(.brown))
-                            .shadow(radius: 10)
-                        Text("🦉")
-                            .font(Font.custom("Avenir", size: 100))
-                    }
+                    OwlLogo()
                     .padding(.bottom, 80)
                     
                     Button(action: {
