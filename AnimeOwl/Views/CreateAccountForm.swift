@@ -18,39 +18,81 @@ struct CreateAccountForm: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section {
+        ZStack {
+            Rectangle()
+                .ignoresSafeArea()
+                .foregroundColor(Color.init(.sRGB, white: 0.1, opacity: 0.7))
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        formShowing = false
+                    }) {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color(.brown))
+                    }
+                    .padding(.trailing)
+                    .padding(.top, -30)
+                }
+                
+                Text("Create an Account")
+                    .padding(.top, 30)
+                    .font(Font.custom("Avenir Heavy", size: 33))
+                    .foregroundColor(Color(.lightText))
+                
+                
+                OwlLogo()
+                    .padding(.bottom, 50)
+                // MARK: - Account info
+                VStack {
                     TextField("Email", text: $email)
+                        .padding(12)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                     TextField("Name", text: $name)
+                        .padding(12)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                     SecureField("Password", text: $password)
+                        .padding(12)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                 }
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 
-                if let errorMessage = errorMessage {
-                    Section {
+                // MARK: - Error Message
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(height: 70)
+                    
+                    // MARK: - Error Message
+                    if let errorMessage = errorMessage {
                         Text(errorMessage)
+                            .bold()
+                            .foregroundColor(.red)
                     }
                 }
+                .padding(.horizontal)
                 
+                // MARK: - Sign In Button
                 Button(action: {
                     createAccount()
                 }) {
-                    HStack {
-                        Spacer()
-                        Text("Create Account")
-                        Spacer()
-                    }
+                    HomeButton(text: "Create Account")
                 }
+                .padding(.top)
+                Spacer()
             }
-            .navigationBarTitle("Create an Account")
-            .navigationBarItems(trailing: Button(action: {
-                formShowing = false
-            }) {
-                Image(systemName: "xmark")
-            })
+            .padding(.top, 50)
         }
+        
     }
     
     func createAccount() {

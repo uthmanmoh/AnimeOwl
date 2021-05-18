@@ -25,7 +25,6 @@ struct LaunchView: View {
                     
                     Spacer()
                     Text("Welcome to AnimeOwl!")
-                        .bold()
                         .font(Font.custom("Avenir Heavy", size: 33))
                         .foregroundColor(Color(.lightText))
                     OwlLogo()
@@ -34,15 +33,7 @@ struct LaunchView: View {
                     Button(action: {
                         loginFormShowing = true
                     }) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color(.brown))
-                                .frame(width: 300, height: 50)
-                            Text("Sign In")
-                                .font(Font.custom("Avenir Heavy", size: 17))
-                                .foregroundColor(.white)
-                        }
-                        .shadow(radius: 7)
+                        HomeButton(text: "Sign In")
                     }
                     .sheet(isPresented: $loginFormShowing, onDismiss: checkLogin) {
                         LoginForm(formShowing: $loginFormShowing)
@@ -51,15 +42,7 @@ struct LaunchView: View {
                     Button(action: {
                         createFormShowing = true
                     }) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color(.brown))
-                                .frame(width: 300, height: 50)
-                            Text("Create Account")
-                                .font(Font.custom("Avenir Heavy", size: 17))
-                                .foregroundColor(.white)
-                        }
-                        .shadow(radius: 7)
+                        HomeButton(text: "Create Account")
                     }
                     .sheet(isPresented: $createFormShowing, onDismiss: checkLogin) {
                         CreateAccountForm(formShowing: $createFormShowing)

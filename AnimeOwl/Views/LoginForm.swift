@@ -27,6 +27,9 @@ struct LoginForm: View {
                         formShowing = false
                     }) {
                         Image(systemName: "xmark")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color(.brown))
                     }
                     .padding(.trailing)
                     .padding(.top, -30)
@@ -35,7 +38,7 @@ struct LoginForm: View {
                 Text("Sign In")
                     .padding(.top, 30)
                     .font(Font.custom("Avenir Heavy", size: 33))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(.lightText))
                 
                 
                 OwlLogo()
@@ -57,33 +60,27 @@ struct LoginForm: View {
                 .disableAutocorrection(true)
                 
                 
-                // MARK: - Error Message
-                if let errorMessage = errorMessage {
-                    Section {
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(height: 70)
+                    
+                    // MARK: - Error Message
+                    if let errorMessage = errorMessage {
                         Text(errorMessage)
+                            .bold()
+                            .foregroundColor(.red)
                     }
                 }
-                
+                .padding(.horizontal)
                 
                 // MARK: - Sign In Button
                 Button(action: {
                     signIn()
                 }) {
-                    HStack {
-                        Spacer()
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(height: 50)
-                                .foregroundColor(Color(.brown))
-                                .padding()
-                            Text("Sign In")
-                                .font(Font.custom("Avenir Heavy", size: 17))
-                                .foregroundColor(.white)
-                        }
-                        .padding(.top)
-                        Spacer()
-                    }
+                    HomeButton(text: "Sign In")
                 }
+                .padding(.top)
                 Spacer()
             }
             .padding(.top, 50)
