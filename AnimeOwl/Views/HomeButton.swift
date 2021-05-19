@@ -13,12 +13,14 @@ struct HomeButton: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color(.brown))
+            Color("button").opacity(0.6)
                 .frame(width: 300, height: 50)
+                .cornerRadius(25)
+                .shadow(color: Color.black.opacity(0.7), radius: 10, x: 0, y: 15)
+                .blur(radius: 1)
             Text(text)
-                .font(Font.custom("Avenir Heavy", size: 17))
-                .foregroundColor(.white)
+                .foregroundColor(Color(.label))
+                .font(Font.custom("Avenir", size: 17))
         }
         .shadow(radius: 7)
     }

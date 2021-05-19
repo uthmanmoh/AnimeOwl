@@ -12,10 +12,11 @@ struct OwlLogo: View {
         ZStack {
             Circle()
                 .frame(width: 200, height: 200)
-                .foregroundColor(Color(.brown))
-                .shadow(radius: 10)
+                .foregroundColor(Color("button"))
+                .shadow(color: .black.opacity(0.7), radius: 10, x: 0, y: 10)
+                .blur(radius: 2)
             Text("🦉")
-                .font(Font.custom("Avenir", size: 100))
+                .font(.system(size: 100))
         }
     }
 }
@@ -23,5 +24,6 @@ struct OwlLogo: View {
 struct OwlLogo_Previews: PreviewProvider {
     static var previews: some View {
         OwlLogo()
+            
     }
 }

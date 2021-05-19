@@ -18,17 +18,20 @@ struct LaunchView: View {
         if !loggedIn {
             
             ZStack {
-                Rectangle()
-                    .foregroundColor(Color.init(.sRGB, white: 0.1, opacity: 0.7))
-                    .ignoresSafeArea()
+                Color.white
+                LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 VStack (spacing: 20) {
                     
                     Spacer()
-                    Text("Welcome to AnimeOwl!")
-                        .font(Font.custom("Avenir Heavy", size: 33))
-                        .foregroundColor(Color(.lightText))
+                    VStack {
+                        Text("Welcome to")
+                            .font(Font.custom("Avenir Heavy", size: 30))
+                        Text("AnimeOwl")
+                            .font(Font.custom("Avenir Heavy", size: 55))
+                    }
+                    .opacity(0.8)
                     OwlLogo()
-                    .padding(.bottom, 80)
+                        .padding(.bottom, 80)
                     
                     Button(action: {
                         loginFormShowing = true
@@ -52,8 +55,9 @@ struct LaunchView: View {
                 }
                 .onAppear {
                     checkLogin()
+                }
             }
-            }
+            .ignoresSafeArea()
             
             
         } else { // loggedIn == true
@@ -68,6 +72,12 @@ struct LaunchView: View {
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchView()
+        Group {
+            LaunchView()
+            LaunchView()
+                .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+        }
+            
+            
     }
 }

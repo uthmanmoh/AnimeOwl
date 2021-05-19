@@ -17,9 +17,8 @@ struct LoginForm: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .ignoresSafeArea()
-                .foregroundColor(Color.init(.sRGB, white: 0.1, opacity: 0.7))
+            Color.white
+            LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)
             VStack {
                 HStack {
                     Spacer()
@@ -29,7 +28,7 @@ struct LoginForm: View {
                         Image(systemName: "xmark")
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(Color(.brown))
+                            .foregroundColor(Color("button"))
                     }
                     .padding(.trailing)
                     .padding(.top, -30)
@@ -38,8 +37,7 @@ struct LoginForm: View {
                 Text("Sign In")
                     .padding(.top, 30)
                     .font(Font.custom("Avenir Heavy", size: 33))
-                    .foregroundColor(Color(.lightText))
-                
+                    .opacity(0.8)
                 
                 OwlLogo()
                     .padding(.bottom, 50)
@@ -47,15 +45,14 @@ struct LoginForm: View {
                 VStack {
                     TextField("Email", text: $email)
                         .padding(12)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(15)
                     SecureField("Password", text: $password)
                         .padding(12)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(15)
                 }
+                .padding(.horizontal)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 
@@ -85,6 +82,7 @@ struct LoginForm: View {
             }
             .padding(.top, 50)
         }
+        .ignoresSafeArea()
         
     }
     
@@ -104,6 +102,10 @@ struct LoginForm: View {
 
 struct LoginForm_Previews: PreviewProvider {
     static var previews: some View {
-        LoginForm(formShowing: Binding.constant(true))
+        Group {
+            LoginForm(formShowing: Binding.constant(true))
+            LoginForm(formShowing: Binding.constant(true))
+                .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+        }
     }
 }
