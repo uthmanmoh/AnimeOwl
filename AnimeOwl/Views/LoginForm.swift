@@ -52,16 +52,16 @@ struct LoginForm: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         
-                        
+                        // MARK: - Error Message
                         ZStack {
                             Rectangle()
                                 .foregroundColor(.clear)
-                                .frame(height: 70)
+                                .frame(height: 50)
                             
-                            // MARK: - Error Message
                             if let errorMessage = errorMessage {
                                 Text(errorMessage)
                                     .bold()
+                                    .font(.system(size: 13))
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(.red)
                             }
