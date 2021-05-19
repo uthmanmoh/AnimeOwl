@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct CreateAccountForm: View {
-    @Binding var formShowing: Bool
+    @Binding var loggedIn: Bool
     
     @State private var email = ""
     @State private var name = ""
@@ -22,30 +22,14 @@ struct CreateAccountForm: View {
             Color.white
             LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)
             VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        formShowing = false
-                    }) {
-                        Image(systemName: "xmark")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("button"))
-                    }
-                    .padding(.trailing)
-                    .padding(.top, -30)
-                }
-                
-                Text("Create an Account")
-                    .padding(.top, 30)
-                    .font(Font.custom("Avenir Heavy", size: 33))
-                    .opacity(0.8)
-                
-                
+                Spacer()
                 OwlLogo()
                     .padding(.bottom, 50)
                 // MARK: - Account info
-                VStack {
+                VStack (alignment: .leading) {
+                    Text("Sign Up")
+                        .font(Font.custom("Avenir", size: 25))
+                        .padding(.leading, 8)
                     TextField("Email", text: $email)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
@@ -73,6 +57,7 @@ struct CreateAccountForm: View {
                     if let errorMessage = errorMessage {
                         Text(errorMessage)
                             .bold()
+                            .multilineTextAlignment(.center)
                             .foregroundColor(.red)
                     }
                 }
@@ -84,10 +69,16 @@ struct CreateAccountForm: View {
                 }) {
                     HomeButton(text: "Create Account")
                 }
-                .padding(.top)
                 Spacer()
             }
             .padding(.top, 50)
+        }
+        .onAppear {
+            // Reset info
+            email = ""
+            name = ""
+            password = ""
+            errorMessage = ""
         }
         .ignoresSafeArea()
         
@@ -99,7 +90,7 @@ struct CreateAccountForm: View {
                 if let error = error {
                     errorMessage = error.localizedDescription
                 } else {
-                    formShowing = false
+                    loggedIn = true
                 }
             }
         }
@@ -109,6 +100,6 @@ struct CreateAccountForm: View {
 
 struct CreateAccountForm_Previews: PreviewProvider {
     static var previews: some View {
-        CreateAccountForm(formShowing: Binding.constant(true))
+        CreateAccountForm(loggedIn: Binding.constant(true))
     }
 }

@@ -11,12 +11,12 @@ struct OwlLogo: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: 200, height: 200)
+                .frame(width: 150, height: 150)
                 .foregroundColor(Color("button"))
                 .shadow(color: .black.opacity(0.7), radius: 10, x: 0, y: 10)
                 .blur(radius: 2)
             Text("🦉")
-                .font(.system(size: 100))
+                .font(.system(size: 75))
         }
     }
 }

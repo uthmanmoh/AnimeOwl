@@ -15,7 +15,6 @@
 		00AAC64C26537BBE00BD57EA /* AnimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC64726537BBE00BD57EA /* AnimeViewModel.swift */; };
 		00AAC64E26537BBE00BD57EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC64A26537BBE00BD57EA /* ContentView.swift */; };
 		00AAC65626537F4F00BD57EA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC65526537F4F00BD57EA /* GoogleService-Info.plist */; };
-		00AAC65A265382E100BD57EA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC659265382E100BD57EA /* LaunchView.swift */; };
 		00AAC65C26538B1F00BD57EA /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC65B26538B1F00BD57EA /* LoginForm.swift */; };
 		00AAC65E26538F7F00BD57EA /* CreateAccountForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */; };
 		00AAC6602653A1CA00BD57EA /* OwlLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */; };
@@ -34,7 +33,6 @@
 		00AAC64726537BBE00BD57EA /* AnimeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeViewModel.swift; sourceTree = "<group>"; };
 		00AAC64A26537BBE00BD57EA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		00AAC65526537F4F00BD57EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		00AAC659265382E100BD57EA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		00AAC65B26538B1F00BD57EA /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountForm.swift; sourceTree = "<group>"; };
 		00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwlLogo.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 		00AAC64926537BBE00BD57EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				00AAC659265382E100BD57EA /* LaunchView.swift */,
 				00AAC64A26537BBE00BD57EA /* ContentView.swift */,
 				00AAC65B26538B1F00BD57EA /* LoginForm.swift */,
 				00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */,
@@ -260,7 +257,6 @@
 			files = (
 				00AAC64C26537BBE00BD57EA /* AnimeViewModel.swift in Sources */,
 				00AAC64E26537BBE00BD57EA /* ContentView.swift in Sources */,
-				00AAC65A265382E100BD57EA /* LaunchView.swift in Sources */,
 				00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */,
 				00AAC65C26538B1F00BD57EA /* LoginForm.swift in Sources */,
 				00AAC64B26537BBE00BD57EA /* AnimeModel.swift in Sources */,

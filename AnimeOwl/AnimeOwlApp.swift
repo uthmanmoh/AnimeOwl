@@ -17,7 +17,7 @@ struct AnimeOwlApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LaunchView()
+            LoginForm()
         }
     }
 }
