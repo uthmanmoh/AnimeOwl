@@ -39,10 +39,14 @@ struct LoginForm: View {
                                 .font(Font.custom("Avenir", size: 25))
                                 .padding(.leading, 8)
                             TextField("Email", text: $email)
+                                .foregroundColor(.black)
+                                .brightness(0.3)
                                 .padding(12)
                                 .background(Color.white.opacity(0.5))
                                 .cornerRadius(15)
                             SecureField("Password", text: $password)
+                                .foregroundColor(.black)
+                                .brightness(0.3)
                                 .padding(12)
                                 .background(Color.white.opacity(0.5))
                                 .cornerRadius(15)
@@ -85,6 +89,7 @@ struct LoginForm: View {
                         
                         Button("Continue as Guest") {
                             // Guest login
+                            loggedIn = true
                         }
                         
                         Spacer()
@@ -95,6 +100,7 @@ struct LoginForm: View {
                 .navigationBarTitle("Home")
                 .navigationBarHidden(true)
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .accentColor(Color(.brown))
             .onAppear {
                 // Reset info
@@ -104,7 +110,8 @@ struct LoginForm: View {
                 checkLogin()
             }
         } else {
-            ContentView(loggedIn: $loggedIn)
+            ListView(loggedIn: $loggedIn)
+                .environmentObject(AnimeModel())
         }
         
     }

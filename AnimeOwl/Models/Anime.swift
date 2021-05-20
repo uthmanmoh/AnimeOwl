@@ -1,6 +1,6 @@
 ////
 ////  Anime.swift
-////  Anime Reviews App
+////  AnimeOwl
 ////
 ////  Created by Uthman Mohamed on 2021-05-06.
 ////
@@ -36,22 +36,60 @@
 //
 //
 
-struct Search: Decodable {
-    var results: [Result]
+import Foundation
+
+struct Top: Decodable {
+    var top: [Result]
 }
 
-struct Result: Decodable {
-    var mal_id: Int
+class Result: Decodable, Identifiable, ObservableObject {
+    
+    @Published var imageData: Data?
+    
+    var id: Int
     var url: String
-    var image_url: String
+    var imageUrl: String?
     var title: String
-    var airing: Bool
-    var synopsis: String
+    //var airing: Bool
+    //var synopsis: String
     var type: String
     var score: Double
-    var start_date: String?
-    var end_date: String?
+    var startDate: String?
+    var endDate: String?
     var members: Int
-    var rated: String?
+    var rank: Int
     var episodes: Int
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case id = "mal_id"
+        case url
+        case imageUrl = "image_url"
+        case title
+        case type
+        case score
+        case startDate = "start_date"
+        case endDate = "end_date"
+        case members
+        case rank
+        case episodes
+        
+    }
+    
+    func getImageData() {
+        guard imageUrl != nil else { return }
+        
+        if let url = URL(string: imageUrl!) {
+            let session = URLSession.shared
+            session.dataTask(with: url) { (data, response, error) in
+                if error == nil, let data = data {
+                    DispatchQueue.main.async {
+                        self.imageData = data
+                    }
+                } else {
+                    print(error?.localizedDescription ?? "Error getting image data")
+                }
+            }.resume()
+        }
+    }
 }

@@ -14,6 +14,7 @@ struct CreateAccountForm: View {
     @State private var email = ""
     @State private var name = ""
     @State private var password = ""
+    @State private var secondPassword = ""
     
     @State private var errorMessage: String?
     
@@ -31,14 +32,26 @@ struct CreateAccountForm: View {
                         .font(Font.custom("Avenir", size: 25))
                         .padding(.leading, 8)
                     TextField("Email", text: $email)
+                        .foregroundColor(.black)
+                        .brightness(0.3)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
-                    TextField("Name", text: $name)
+                    TextField("Username", text: $name)
+                        .foregroundColor(.black)
+                        .brightness(0.3)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
                     SecureField("Password", text: $password)
+                        .foregroundColor(.black)
+                        .brightness(0.3)
+                        .padding(12)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(15)
+                    SecureField("Re-Enter Password", text: $secondPassword)
+                        .foregroundColor(.black)
+                        .brightness(0.3)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
@@ -85,6 +98,11 @@ struct CreateAccountForm: View {
     }
     
     func createAccount() {
+        if secondPassword != password {
+            errorMessage = "Passwords do not match"
+            return
+        }
+        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             DispatchQueue.main.async {
                 if let error = error {
