@@ -19,12 +19,9 @@ struct LoginForm: View {
             
             NavigationView {
                 ZStack {
-                    Color.white
-                    LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    BackgroundColour()
                     VStack {
                         VStack {
-                            Text("Welcome to")
-                                .font(Font.custom("Avenir Heavy", size: 30))
                             Text("AnimeOwl")
                                 .font(Font.custom("Avenir Heavy", size: 55))
                         }
@@ -35,8 +32,8 @@ struct LoginForm: View {
                         
                         // MARK: - Login info
                         VStack (alignment: .leading) {
-                            Text("Sign In")
-                                .font(Font.custom("Avenir", size: 25))
+                            Text("Login")
+                                .font(Font.custom("Avenir Heavy", size: 25))
                                 .padding(.leading, 8)
                             TextField("Email", text: $email)
                                 .foregroundColor(.black)
@@ -110,7 +107,7 @@ struct LoginForm: View {
                 checkLogin()
             }
         } else {
-            ListView(loggedIn: $loggedIn)
+            TabsView(loggedIn: $loggedIn)
                 .environmentObject(AnimeModel())
         }
         

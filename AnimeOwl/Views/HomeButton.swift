@@ -20,7 +20,7 @@ struct HomeButton: View {
                 .blur(radius: 1)
             Text(text)
                 .foregroundColor(Color(.label))
-                .font(Font.custom("Avenir", size: 17))
+                .font(Font.custom("Avenir Heavy", size: 17))
         }
         .shadow(radius: 7)
     }

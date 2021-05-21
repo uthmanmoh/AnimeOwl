@@ -28,7 +28,7 @@ struct CreateAccountForm: View {
                     .padding(.bottom, 50)
                 // MARK: - Account info
                 VStack (alignment: .leading) {
-                    Text("Sign Up")
+                    Text("Create an Account")
                         .font(Font.custom("Avenir", size: 25))
                         .padding(.leading, 8)
                     TextField("Email", text: $email)
@@ -91,6 +91,7 @@ struct CreateAccountForm: View {
             email = ""
             name = ""
             password = ""
+            secondPassword = ""
             errorMessage = ""
         }
         .ignoresSafeArea()
