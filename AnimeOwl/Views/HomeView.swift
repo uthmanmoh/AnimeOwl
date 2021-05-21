@@ -10,8 +10,13 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var model: AnimeModel
+    @State private var logoPressed = false
     
     private let gridItems = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    
+    init() {
+        UINavigationBar.appearance().barTintColor = UIColor.init(Color("button"))
+    }
     
     var body: some View {
         NavigationView {
@@ -25,17 +30,25 @@ struct HomeView: View {
                                 AnimeCard(anime: anime)
                             }
                         }
+                        .padding(.horizontal)
                     }
                     .navigationBarTitle("Top Anime")
-                    .navigationBarItems(trailing:
-                        ZStack {
-                            Circle()
-                                .foregroundColor(Color("button"))
-                                .frame(width: 60, height: 60)
-                                .shadow(radius: 5)
-                                .blur(radius: 1)
-                            Text("🦉")
-                                .font(.system(size: 30))
+                    .navigationBarItems(leading:
+                        Button(action: {
+                            logoPressed = true
+                        }) {
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(Color("button"))
+                                    .frame(width: 45, height: 45)
+                                    .shadow(color: .black.opacity(2) ,radius: 10)
+                                    .blur(radius: 1)
+                                Text("🦉")
+                                    .font(.system(size: 27))
+                            }
+                        }
+                        .sheet(isPresented: $logoPressed) {
+                            Text("Profile/settings?")
                         }
                     )
                 }

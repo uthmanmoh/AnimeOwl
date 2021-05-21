@@ -15,6 +15,11 @@ struct TabsView: View {
     
     @State private var tabSelected = 1
     
+    init(loggedIn: Binding<Bool>) {
+        self._loggedIn = loggedIn
+        UITabBar.appearance().barTintColor = UIColor.init(Color("button"))
+    }
+    
     var body: some View {
         TabView (selection: $tabSelected) {
             HomeView()
@@ -25,7 +30,7 @@ struct TabsView: View {
                     }
                 }
             
-            ProgressView()
+            Text("Calendar View here")
                 .tabItem {
                     VStack {
                         Image(systemName: "calendar")
@@ -33,7 +38,7 @@ struct TabsView: View {
                     }
                 }
             
-            ProgressView()
+            Text("Search View here")
                 .tabItem {
                     VStack {
                         Image(systemName: "magnifyingglass")
@@ -41,7 +46,7 @@ struct TabsView: View {
                     }
                 }
         }
-        
+        .accentColor(Color(.label))
     }
     
 }
