@@ -9,13 +9,13 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginForm: View {
-    @State private var loggedIn = false
+    @EnvironmentObject var userModel: UserModel
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage: String?
     
     var body: some View {
-        if !loggedIn {
+        if !userModel.loggedIn {
             
             NavigationView {
                 ZStack {
@@ -78,7 +78,7 @@ struct LoginForm: View {
                         
                         // MARK: - Create Account
                         NavigationLink(
-                            destination: CreateAccountForm(loggedIn: $loggedIn),
+                            destination: CreateAccountForm(),
                             label: {
                                 HomeButton(text: "Sign Up")
                                     .padding(.vertical)
@@ -86,7 +86,7 @@ struct LoginForm: View {
                         
                         Button("Continue as Guest") {
                             // Guest login
-                            loggedIn = true
+                            userModel.loggedIn = true
                         }
                         
                         Spacer()
@@ -107,14 +107,14 @@ struct LoginForm: View {
                 checkLogin()
             }
         } else {
-            TabsView(loggedIn: $loggedIn)
+            TabsView()
                 .environmentObject(AnimeModel())
         }
         
     }
     
     func checkLogin() {
-        self.loggedIn = Auth.auth().currentUser == nil ? false: true
+        userModel.loggedIn = Auth.auth().currentUser == nil ? false: true
     }
     
     func signIn() {
@@ -123,7 +123,7 @@ struct LoginForm: View {
                 if let error = error {
                     errorMessage = error.localizedDescription
                 } else {
-                    loggedIn = true
+                    userModel.loggedIn = true
                 }
             }
         }

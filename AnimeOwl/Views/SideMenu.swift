@@ -9,6 +9,8 @@ import SwiftUI
 import FirebaseAuth
 
 struct SideMenu: View {
+    @EnvironmentObject var userModel: UserModel
+    
     let width: CGFloat
     @Binding var sideBarOpened: Bool
     
@@ -75,7 +77,7 @@ struct SideMenu: View {
                         Divider()
                         Button("Log Out") {
                             try? Auth.auth().signOut()
-                            //loggedIn = false
+                            userModel.loggedIn = false
                         }
                     }
                 }

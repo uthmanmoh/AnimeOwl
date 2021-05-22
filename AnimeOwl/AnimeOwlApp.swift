@@ -18,6 +18,7 @@ struct AnimeOwlApp: App {
     var body: some Scene {
         WindowGroup {
             LoginForm()
+                .environmentObject(UserModel())
         }
     }
 }

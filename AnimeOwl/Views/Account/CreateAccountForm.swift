@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct CreateAccountForm: View {
-    @Binding var loggedIn: Bool
+    @EnvironmentObject var userModel: UserModel
     
     @State private var email = ""
     @State private var name = ""
@@ -109,16 +109,16 @@ struct CreateAccountForm: View {
                 if let error = error {
                     errorMessage = error.localizedDescription
                 } else {
-                    loggedIn = true
+                    userModel.loggedIn = true
                 }
             }
         }
     }
     
 }
-
-struct CreateAccountForm_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateAccountForm(loggedIn: Binding.constant(true))
-    }
-}
+//
+//struct CreateAccountForm_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CreateAccountForm()
+//    }
+//}

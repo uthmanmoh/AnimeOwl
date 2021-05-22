@@ -9,14 +9,11 @@ import SwiftUI
 import FirebaseAuth
 
 struct TabsView: View {
-    
-    @Binding var loggedIn: Bool
     @EnvironmentObject var model: AnimeModel
     
     @State private var tabSelected = 1
     
-    init(loggedIn: Binding<Bool>) {
-        self._loggedIn = loggedIn
+    init() {
         UITabBar.appearance().barTintColor = UIColor.init(Color("button"))
     }
     
