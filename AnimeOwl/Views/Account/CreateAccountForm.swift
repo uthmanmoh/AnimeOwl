@@ -37,6 +37,7 @@ struct CreateAccountForm: View {
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
+                        .keyboardType(.emailAddress)
                     TextField("Username", text: $name)
                         .foregroundColor(.black)
                         .brightness(0.3)

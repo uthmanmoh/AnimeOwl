@@ -41,6 +41,7 @@ struct LoginForm: View {
                                 .padding(12)
                                 .background(Color.white.opacity(0.5))
                                 .cornerRadius(15)
+                                .keyboardType(.emailAddress)
                             SecureField("Password", text: $password)
                                 .foregroundColor(.black)
                                 .brightness(0.3)
