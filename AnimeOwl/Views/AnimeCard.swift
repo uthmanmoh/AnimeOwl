@@ -13,7 +13,7 @@ struct AnimeCard: View {
     var body: some View {
         VStack {
             let uiImage = UIImage(data: anime.imageData ?? Data())
-            NavigationLink(destination: ProgressView()) {
+            NavigationLink(destination: AnimeDetailView(anime: anime)) {
                 Image(uiImage: uiImage ?? UIImage())
                     .resizable()
                     .aspectRatio(0.7272, contentMode: .fit)

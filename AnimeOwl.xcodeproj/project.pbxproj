@@ -22,6 +22,9 @@
 		00CDFF2C26562973000E88C8 /* AnimeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF2B26562973000E88C8 /* AnimeCard.swift */; };
 		00CDFF2E2657034A000E88C8 /* BackgroundColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF2D2657034A000E88C8 /* BackgroundColour.swift */; };
 		00CDFF3026573100000E88C8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF2F26573100000E88C8 /* HomeView.swift */; };
+		00CDFF322658B250000E88C8 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF312658B250000E88C8 /* SideMenu.swift */; };
+		00CDFF362658C38E000E88C8 /* AnimeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */; };
+		00CDFF382658DC35000E88C8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF372658DC35000E88C8 /* UserModel.swift */; };
 		9D9E0612C3422745C84A5E87 /* Pods_AnimeOwl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,9 @@
 		00CDFF2B26562973000E88C8 /* AnimeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeCard.swift; sourceTree = "<group>"; };
 		00CDFF2D2657034A000E88C8 /* BackgroundColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColour.swift; sourceTree = "<group>"; };
 		00CDFF2F26573100000E88C8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		00CDFF312658B250000E88C8 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailView.swift; sourceTree = "<group>"; };
+		00CDFF372658DC35000E88C8 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimeOwl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D491E9B5E5A2E402E04AC10 /* Pods-AnimeOwl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.release.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.release.xcconfig"; sourceTree = "<group>"; };
 		B099514FEF3C754AACF689AE /* Pods-AnimeOwl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.debug.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				00AAC64726537BBE00BD57EA /* AnimeModel.swift */,
+				00CDFF372658DC35000E88C8 /* UserModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -122,13 +129,12 @@
 			isa = PBXGroup;
 			children = (
 				00AAC64A26537BBE00BD57EA /* TabsView.swift */,
+				00CDFF312658B250000E88C8 /* SideMenu.swift */,
 				00CDFF2F26573100000E88C8 /* HomeView.swift */,
-				00AAC65B26538B1F00BD57EA /* LoginForm.swift */,
-				00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */,
-				00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */,
-				00AAC6612653A79E00BD57EA /* HomeButton.swift */,
 				00CDFF2B26562973000E88C8 /* AnimeCard.swift */,
-				00CDFF2D2657034A000E88C8 /* BackgroundColour.swift */,
+				00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */,
+				00CDFF332658B35D000E88C8 /* Account */,
+				00CDFF342658B37E000E88C8 /* Common */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -139,6 +145,25 @@
 				00CDFF2926560C72000E88C8 /* Constants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		00CDFF332658B35D000E88C8 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				00AAC65B26538B1F00BD57EA /* LoginForm.swift */,
+				00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		00CDFF342658B37E000E88C8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */,
+				00AAC6612653A79E00BD57EA /* HomeButton.swift */,
+				00CDFF2D2657034A000E88C8 /* BackgroundColour.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		677F6985761A42E1E8AA0D02 /* Pods */ = {
@@ -272,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00CDFF362658C38E000E88C8 /* AnimeDetailView.swift in Sources */,
 				00CDFF2C26562973000E88C8 /* AnimeCard.swift in Sources */,
 				00AAC64C26537BBE00BD57EA /* AnimeModel.swift in Sources */,
 				00AAC64E26537BBE00BD57EA /* TabsView.swift in Sources */,
@@ -280,9 +306,11 @@
 				00AAC64426537BA300BD57EA /* Anime.swift in Sources */,
 				00CDFF2E2657034A000E88C8 /* BackgroundColour.swift in Sources */,
 				00AAC65E26538F7F00BD57EA /* CreateAccountForm.swift in Sources */,
+				00CDFF322658B250000E88C8 /* SideMenu.swift in Sources */,
 				00AAC6622653A79E00BD57EA /* HomeButton.swift in Sources */,
 				00CDFF3026573100000E88C8 /* HomeView.swift in Sources */,
 				00AAC6602653A1CA00BD57EA /* OwlLogo.swift in Sources */,
+				00CDFF382658DC35000E88C8 /* UserModel.swift in Sources */,
 				00CDFF2A26560C72000E88C8 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

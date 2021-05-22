@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var model: AnimeModel
-    @State private var logoPressed = false
+    @State private var sideBarOpened = false
     
     private let gridItems = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
@@ -19,23 +19,31 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
-            if model.animes != nil {
-                ZStack {
-                    BackgroundColour()
-                        .ignoresSafeArea()
-                    ScrollView(showsIndicators: false) {
-                        LazyVGrid (columns: gridItems) {
-                            ForEach(model.animes!.top) { anime in
-                                AnimeCard(anime: anime)
+        ZStack {
+            if sideBarOpened {
+                SideMenu(width: 300, sideBarOpened: $sideBarOpened)
+            }
+            
+            NavigationView {
+                if model.animes != nil {
+                    ZStack {
+                        BackgroundColour()
+                            .ignoresSafeArea()
+                        ScrollView(showsIndicators: false) {
+                            LazyVGrid (columns: gridItems) {
+                                ForEach(model.animes!.top) { anime in
+                                    AnimeCard(anime: anime)
+                                }
                             }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
                     }
                     .navigationBarTitle("Top Anime")
                     .navigationBarItems(leading:
                         Button(action: {
-                            logoPressed = true
+                            withAnimation(.spring()){
+                                sideBarOpened.toggle()
+                            }
                         }) {
                             ZStack {
                                 Circle()
@@ -47,21 +55,24 @@ struct HomeView: View {
                                     .font(.system(size: 27))
                             }
                         }
-                        .sheet(isPresented: $logoPressed) {
-                            Text("Profile/settings?")
-                        }
                     )
+                } else {
+                    ProgressView()
                 }
-            } else {
-                ProgressView()
             }
+            .cornerRadius(sideBarOpened ? 20 : 0)
+            .offset(x: sideBarOpened ? 300 : 0, y: sideBarOpened ? 50 : 0)
+            .scaleEffect(sideBarOpened ? 0.8 : 1)
+            .blur(radius: sideBarOpened ? 5 : 0)
+            .allowsHitTesting(sideBarOpened ? false : true)
         }
+        .ignoresSafeArea()
         
     }
 }
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
+//
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//    }
+//}
