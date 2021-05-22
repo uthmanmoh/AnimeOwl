@@ -20,12 +20,13 @@ struct SideMenu: View {
                 .ignoresSafeArea()
             
             Button(action :{
-                withAnimation(.default) {
+                withAnimation(.spring()) {
                     sideBarOpened.toggle()
                 }
             }) {
-                Text("Cancel")
-                    .foregroundColor(.blue)
+                Image(systemName: "xmark")
+                    .resizable()
+                    .frame(width: 20, height: 20)
             }
             .padding()
             .padding(.top, 60)

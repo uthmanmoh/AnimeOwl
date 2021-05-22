@@ -64,7 +64,35 @@ struct HomeView: View {
             .offset(x: sideBarOpened ? 300 : 0, y: sideBarOpened ? 50 : 0)
             .scaleEffect(sideBarOpened ? 0.8 : 1)
             .blur(radius: sideBarOpened ? 5 : 0)
-            .allowsHitTesting(sideBarOpened ? false : true)
+            .overlay(
+                Rectangle()
+                    .foregroundColor(Color("button").opacity(0.01))
+                    .frame(maxWidth: sideBarOpened ? .infinity : 0, maxHeight: sideBarOpened ? .infinity : 0)
+                    .cornerRadius(sideBarOpened ? 20 : 0)
+                    .offset(x: sideBarOpened ? 300 : 0, y: sideBarOpened ? 50 : 0)
+                    .scaleEffect(sideBarOpened ? 0.8 : 1)
+                    .onTapGesture {
+                        withAnimation(.spring()) {
+                            sideBarOpened.toggle()
+                        }
+                    }
+                    .gesture(
+                        DragGesture()
+                            .onChanged{ value in
+                                if value.translation != CGSize.zero {
+                                    withAnimation(.spring()) {
+                                        sideBarOpened.toggle()
+                                    }
+                                }
+                            }
+                            
+                            .onEnded({ _ in
+                                withAnimation(.spring()) {
+                                    sideBarOpened.toggle()
+                                }
+                            })
+                    )
+            )
         }
         .ignoresSafeArea()
         
