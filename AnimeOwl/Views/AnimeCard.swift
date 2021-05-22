@@ -16,10 +16,10 @@ struct AnimeCard: View {
             NavigationLink(destination: AnimeDetailView(anime: anime)) {
                 Image(uiImage: uiImage ?? UIImage())
                     .resizable()
-                    .aspectRatio(0.7272, contentMode: .fit)
+                    .aspectRatio(0.6466, contentMode: .fit)
                     .frame(height: 180)
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
+                    .clipShape(RoundedRectangle(cornerRadius: 22))
+                    .shadow(color: Color(.label), radius: 10)
             }
             Text(anime.title)
                 .bold()

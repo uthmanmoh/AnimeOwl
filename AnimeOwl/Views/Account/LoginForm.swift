@@ -10,13 +10,13 @@ import FirebaseAuth
 
 struct LoginForm: View {
     @EnvironmentObject var userModel: UserModel
+    
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage: String?
     
     var body: some View {
         if !userModel.loggedIn {
-            
             NavigationView {
                 ZStack {
                     BackgroundColour()
@@ -37,14 +37,14 @@ struct LoginForm: View {
                                 .padding(.leading, 8)
                             TextField("Email", text: $email)
                                 .foregroundColor(.black)
-                                .brightness(0.3)
+                                .brightness(email == "" ? 0.3 : 0)
                                 .padding(12)
                                 .background(Color.white.opacity(0.5))
                                 .cornerRadius(15)
                                 .keyboardType(.emailAddress)
                             SecureField("Password", text: $password)
                                 .foregroundColor(.black)
-                                .brightness(0.3)
+                                .brightness(password == "" ? 0.3 : 0)
                                 .padding(12)
                                 .background(Color.white.opacity(0.5))
                                 .cornerRadius(15)
@@ -55,20 +55,7 @@ struct LoginForm: View {
                         .disableAutocorrection(true)
                         
                         // MARK: - Error Message
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(.clear)
-                                .frame(height: 50)
-                            
-                            if let errorMessage = errorMessage {
-                                Text(errorMessage)
-                                    .bold()
-                                    .font(.system(size: 13))
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(.red)
-                            }
-                        }
-                        .padding(.horizontal)
+                        ErrorMessage(errorMessage: $errorMessage)
                         
                         // MARK: - Login Button
                         Button(action: {
@@ -95,20 +82,16 @@ struct LoginForm: View {
                     .padding(.top, 50)
                 }
                 .ignoresSafeArea()
-                .navigationBarTitle("Home")
+                .navigationBarTitle("Login")
                 .navigationBarHidden(true)
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .accentColor(Color(.brown))
             .onAppear {
-                // Reset info
-                email = ""
-                password = ""
-                errorMessage = ""
-                checkLogin()
+                resetInfo()
             }
         } else {
-            TabsView()
+            HomeView()
                 .environmentObject(AnimeModel())
         }
         
@@ -130,14 +113,21 @@ struct LoginForm: View {
         }
     }
     
+    func resetInfo() {
+        email = ""
+        password = ""
+        errorMessage = ""
+        checkLogin()
+    }
+    
 }
 
-struct LoginForm_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LoginForm()
-            LoginForm()
-                .preferredColorScheme(.dark)
-        }
-    }
-}
+//struct LoginForm_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            LoginForm()
+//            LoginForm()
+//                .preferredColorScheme(.dark)
+//        }
+//    }
+//}

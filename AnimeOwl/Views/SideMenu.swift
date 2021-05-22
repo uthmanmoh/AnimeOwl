@@ -28,6 +28,7 @@ struct SideMenu: View {
                     .resizable()
                     .frame(width: 20, height: 20)
             }
+            .accentColor(Color(.brown))
             .padding()
             .padding(.top, 60)
         
@@ -80,6 +81,8 @@ struct SideMenu: View {
                             try? Auth.auth().signOut()
                             userModel.loggedIn = false
                         }
+                        .accentColor(Color(.brown))
+                        .font(.system(.headline))
                     }
                 }
                 

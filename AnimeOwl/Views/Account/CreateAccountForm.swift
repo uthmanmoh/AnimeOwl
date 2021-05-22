@@ -12,7 +12,7 @@ struct CreateAccountForm: View {
     @EnvironmentObject var userModel: UserModel
     
     @State private var email = ""
-    @State private var name = ""
+    @State private var username = ""
     @State private var password = ""
     @State private var secondPassword = ""
     
@@ -20,39 +20,39 @@ struct CreateAccountForm: View {
     
     var body: some View {
         ZStack {
-            Color.white
-            LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            BackgroundColour()
             VStack {
                 Spacer()
                 OwlLogo()
                     .padding(.bottom, 50)
+                    .padding(.top, -20)
                 // MARK: - Account info
                 VStack (alignment: .leading) {
                     Text("Create an Account")
-                        .font(Font.custom("Avenir", size: 25))
+                        .font(Font.custom("Avenir Heavy", size: 25))
                         .padding(.leading, 8)
                     TextField("Email", text: $email)
                         .foregroundColor(.black)
-                        .brightness(0.3)
+                        .brightness(email == "" ? 0.3 : 0)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
                         .keyboardType(.emailAddress)
-                    TextField("Username", text: $name)
+                    TextField("Username", text: $username)
                         .foregroundColor(.black)
-                        .brightness(0.3)
+                        .brightness(username == "" ? 0.3 : 0)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
                     SecureField("Password", text: $password)
                         .foregroundColor(.black)
-                        .brightness(0.3)
+                        .brightness(password == "" ? 0.3 : 0)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
                     SecureField("Re-Enter Password", text: $secondPassword)
                         .foregroundColor(.black)
-                        .brightness(0.3)
+                        .brightness(secondPassword == "" ? 0.3 : 0)
                         .padding(12)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
@@ -62,20 +62,7 @@ struct CreateAccountForm: View {
                 .disableAutocorrection(true)
                 
                 // MARK: - Error Message
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(height: 50)
-                    
-                    if let errorMessage = errorMessage {
-                        Text(errorMessage)
-                            .bold()
-                            .font(.system(size: 13))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.red)
-                    }
-                }
-                .padding(.horizontal)
+                ErrorMessage(errorMessage: $errorMessage)
                 
                 // MARK: - Sign In Button
                 Button(action: {
@@ -85,15 +72,9 @@ struct CreateAccountForm: View {
                 }
                 Spacer()
             }
-            .padding(.top, 50)
         }
         .onAppear {
-            // Reset info
-            email = ""
-            name = ""
-            password = ""
-            secondPassword = ""
-            errorMessage = ""
+            resetInfo()
         }
         .ignoresSafeArea()
         
@@ -114,6 +95,14 @@ struct CreateAccountForm: View {
                 }
             }
         }
+    }
+    
+    func resetInfo() {
+        email = ""
+        username = ""
+        password = ""
+        secondPassword = ""
+        errorMessage = ""
     }
     
 }

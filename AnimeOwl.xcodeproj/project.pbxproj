@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		008B12352659A5B600E7193A /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B12342659A5B600E7193A /* ErrorMessage.swift */; };
 		00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */; };
 		00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63726537B7900BD57EA /* Assets.xcassets */; };
 		00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		008B12342659A5B600E7193A /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		00AAC63026537B7700BD57EA /* AnimeOwl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeOwl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeOwlApp.swift; sourceTree = "<group>"; };
 		00AAC63726537B7900BD57EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				00AAC65B26538B1F00BD57EA /* LoginForm.swift */,
 				00AAC65D26538F7F00BD57EA /* CreateAccountForm.swift */,
+				008B12342659A5B600E7193A /* ErrorMessage.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				00CDFF322658B250000E88C8 /* SideMenu.swift in Sources */,
 				00AAC6622653A79E00BD57EA /* HomeButton.swift in Sources */,
 				00CDFF3026573100000E88C8 /* HomeView.swift in Sources */,
+				008B12352659A5B600E7193A /* ErrorMessage.swift in Sources */,
 				00AAC6602653A1CA00BD57EA /* OwlLogo.swift in Sources */,
 				00CDFF382658DC35000E88C8 /* UserModel.swift in Sources */,
 				00CDFF2A26560C72000E88C8 /* Constants.swift in Sources */,

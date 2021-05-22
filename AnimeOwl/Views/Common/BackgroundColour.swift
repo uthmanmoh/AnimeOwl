@@ -11,7 +11,7 @@ struct BackgroundColour: View {
     var body: some View {
         ZStack {
             Color.white
-            LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.8)]), startPoint: .topLeading, endPoint: .bottomTrailing)
         }
     }
 }

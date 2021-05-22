@@ -33,6 +33,7 @@ struct HomeView: View {
                             LazyVGrid (columns: gridItems) {
                                 ForEach(model.animes!.top) { anime in
                                     AnimeCard(anime: anime)
+                                        .padding(.horizontal, 3)
                                 }
                             }
                             .padding(.horizontal)
@@ -60,6 +61,7 @@ struct HomeView: View {
                     ProgressView()
                 }
             }
+            .accentColor(Color(.brown))
             .cornerRadius(sideBarOpened ? 20 : 0)
             .offset(x: sideBarOpened ? 300 : 0, y: sideBarOpened ? 50 : 0)
             .scaleEffect(sideBarOpened ? 0.8 : 1)

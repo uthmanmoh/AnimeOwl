@@ -9,7 +9,6 @@ import SwiftUI
 import FirebaseAuth
 
 struct TabsView: View {
-    @EnvironmentObject var model: AnimeModel
     
     @State private var tabSelected = 1
     
