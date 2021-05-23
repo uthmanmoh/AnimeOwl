@@ -18,23 +18,15 @@ class AnimeModel: ObservableObject {
     }
     
     func getAnimeList() {
-        
+
         let url = URL(string: "\(Constants.API_URL)/top/anime/1")!
+        //let url = URL(string: "\(Constants.API_URL)/search/anime?q=Shingekipage=1")!
+        //let url = URL(string: "\(Constants.API_URL)/schedule/monday")!
         
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            //          if let response = response {
-            //            print(response)
-            //
-            //            if let data = data, let body = String(data: data, encoding: .utf8) {
-            //                print("Data = ", data)
-            //                print("Body = ", body)
-            //            }
-            //          } else {
-            //            print(error ?? "Unknown error")
-            //          }
             if error == nil, let data = data {
                 
                 do {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimeDetailView: View {
-    var anime: Result
+    var anime: Anime
     
     var body: some View {
         ZStack {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimeCard: View {
-    @ObservedObject var anime: Result
+    @ObservedObject var anime: Anime
     
     var body: some View {
         VStack {

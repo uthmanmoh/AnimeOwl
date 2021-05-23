@@ -39,10 +39,10 @@
 import Foundation
 
 struct Top: Decodable {
-    var top: [Result]
+    var top: [Anime]
 }
 
-class Result: Decodable, Identifiable, ObservableObject {
+class Anime: Decodable, Identifiable, ObservableObject {
     
     @Published var imageData: Data?
     
