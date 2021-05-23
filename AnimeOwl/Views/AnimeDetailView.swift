@@ -8,36 +8,56 @@
 import SwiftUI
 
 struct AnimeDetailView: View {
-    var anime: Anime
+    @EnvironmentObject var model: AnimeModel
+    
+    @State private var following = false
     
     var body: some View {
-        ZStack {
-            BackgroundColour()
-            let uiImage = UIImage(data: anime.imageData ?? Data())
-            Image(uiImage: uiImage ?? UIImage())
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.maxX, height: UIScreen.main.bounds.maxY)
-                .opacity(0.4)
-                .blur(radius: 10)
-            VStack {
-                Text(anime.title)
-                    .bold()
-                    .font(.system(size: 34))
-                    .padding(.top, 75)
+        if let anime = model.detailAnime {
+            ZStack {
+                BackgroundColour()
+                    .ignoresSafeArea()
                 
-                VStack (alignment: .leading, spacing: 10) {
-                    Text("This anime is rated #\(anime.rank) on MyAnimeList with \(anime.score, specifier: "%.2f") stars")
-                    Text("It has \(anime.episodes) episodes starting from \(anime.startDate ?? "*Unknown*") to \(anime.endDate ?? "*Unknown*")")
+                let uiImage = UIImage(data: anime.imageData ?? Data())
+                Image(uiImage: uiImage ?? UIImage())
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    .frame(width: UIScreen.main.bounds.maxX, height: UIScreen.main.bounds.maxY)
+                    .opacity(0.3)
+                    .blur(radius: 2)
+                
+                ScrollView {
+                    VStack {
+                        
+                        VStack (alignment: .leading, spacing: 10) {
+                            Text("This anime is rated #\(anime.rank) on MyAnimeList with \(anime.score, specifier: "%.2f") stars")
+                            Text("It has \(anime.episodes) episodes starting")
+                            Text("description: \(anime.synopsis)")
+                        }
+                        .padding(.top)
+                        .font(.system(size: 20, weight: .medium))
+                    }
                 }
-                .padding(.top)
-                .font(.system(size: 20, weight: .medium))
+                .frame(width: UIScreen.main.bounds.maxX-40, height: UIScreen.main.bounds.maxY-200)
+                .navigationTitle(anime.title)
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        following.toggle()
+                    }) {
+                        Image(systemName: following ? "heart.fill" : "heart")
+                    }
+                )
                 
-                Spacer()
             }
-            .padding()
         }
-        .ignoresSafeArea()
+        else {
+            ZStack {
+                BackgroundColour()
+                ProgressView()
+            }
+            .ignoresSafeArea()
+        }
     }
 }
 //

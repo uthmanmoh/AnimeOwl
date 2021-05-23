@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		008B12352659A5B600E7193A /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B12342659A5B600E7193A /* ErrorMessage.swift */; };
+		008B1237265A07CB00E7193A /* DetailAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B1236265A07CB00E7193A /* DetailAnime.swift */; };
 		00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */; };
 		00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63726537B7900BD57EA /* Assets.xcassets */; };
 		00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		008B12342659A5B600E7193A /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		008B1236265A07CB00E7193A /* DetailAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAnime.swift; sourceTree = "<group>"; };
 		00AAC63026537B7700BD57EA /* AnimeOwl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeOwl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeOwlApp.swift; sourceTree = "<group>"; };
 		00AAC63726537B7900BD57EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				00AAC64326537BA300BD57EA /* Anime.swift */,
+				008B1236265A07CB00E7193A /* DetailAnime.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				00AAC64C26537BBE00BD57EA /* AnimeModel.swift in Sources */,
 				00AAC64E26537BBE00BD57EA /* TabsView.swift in Sources */,
 				00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */,
+				008B1237265A07CB00E7193A /* DetailAnime.swift in Sources */,
 				00AAC65C26538B1F00BD57EA /* LoginForm.swift in Sources */,
 				00AAC64426537BA300BD57EA /* Anime.swift in Sources */,
 				00CDFF2E2657034A000E88C8 /* BackgroundColour.swift in Sources */,
