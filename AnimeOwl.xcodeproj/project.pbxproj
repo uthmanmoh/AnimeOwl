@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		008B12352659A5B600E7193A /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B12342659A5B600E7193A /* ErrorMessage.swift */; };
 		008B1237265A07CB00E7193A /* DetailAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B1236265A07CB00E7193A /* DetailAnime.swift */; };
+		008B1239265B5F0D00E7193A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B1238265B5F0D00E7193A /* User.swift */; };
+		008B123B265B5F7F00E7193A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B123A265B5F7F00E7193A /* UserService.swift */; };
 		00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */; };
 		00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63726537B7900BD57EA /* Assets.xcassets */; };
 		00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		008B12342659A5B600E7193A /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		008B1236265A07CB00E7193A /* DetailAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAnime.swift; sourceTree = "<group>"; };
+		008B1238265B5F0D00E7193A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		008B123A265B5F7F00E7193A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		00AAC63026537B7700BD57EA /* AnimeOwl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeOwl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeOwlApp.swift; sourceTree = "<group>"; };
 		00AAC63726537B7900BD57EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 			children = (
 				00AAC64326537BA300BD57EA /* Anime.swift */,
 				008B1236265A07CB00E7193A /* DetailAnime.swift */,
+				008B1238265B5F0D00E7193A /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				00CDFF2926560C72000E88C8 /* Constants.swift */,
+				008B123A265B5F7F00E7193A /* UserService.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -316,7 +322,9 @@
 				00CDFF322658B250000E88C8 /* SideMenu.swift in Sources */,
 				00AAC6622653A79E00BD57EA /* HomeButton.swift in Sources */,
 				00CDFF3026573100000E88C8 /* HomeView.swift in Sources */,
+				008B123B265B5F7F00E7193A /* UserService.swift in Sources */,
 				008B12352659A5B600E7193A /* ErrorMessage.swift in Sources */,
+				008B1239265B5F0D00E7193A /* User.swift in Sources */,
 				00AAC6602653A1CA00BD57EA /* OwlLogo.swift in Sources */,
 				00CDFF382658DC35000E88C8 /* UserModel.swift in Sources */,
 				00CDFF2A26560C72000E88C8 /* Constants.swift in Sources */,

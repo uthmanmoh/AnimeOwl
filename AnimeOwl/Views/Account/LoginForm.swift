@@ -94,21 +94,19 @@ struct LoginForm: View {
             HomeView()
                 .environmentObject(AnimeModel())
         }
-        
-    }
-    
-    func checkLogin() {
-        userModel.loggedIn = Auth.auth().currentUser == nil ? false: true
     }
     
     func signIn() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             DispatchQueue.main.async {
-                if let error = error {
-                    errorMessage = error.localizedDescription
-                } else {
-                    userModel.loggedIn = true
+                guard error == nil else {
+                    errorMessage = error!.localizedDescription
+                    return
                 }
+                
+                userModel.checkLogin()
+                
+                userModel.getUserData()
             }
         }
     }
@@ -117,7 +115,7 @@ struct LoginForm: View {
         email = ""
         password = ""
         errorMessage = ""
-        checkLogin()
+        userModel.checkLogin()
     }
     
 }

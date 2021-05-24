@@ -9,8 +9,7 @@ import SwiftUI
 
 struct AnimeDetailView: View {
     @EnvironmentObject var model: AnimeModel
-    
-    @State private var following = false
+    @EnvironmentObject var userModel: UserModel
     
     var body: some View {
         if let anime = model.detailAnime {
@@ -43,9 +42,19 @@ struct AnimeDetailView: View {
                 .navigationTitle(anime.title)
                 .navigationBarItems(trailing:
                     Button(action: {
-                        following.toggle()
+                        model.isFollowingAnime.toggle()
+                        
+                        if model.isFollowingAnime {
+                            userModel.followAnime(anime: anime)
+                        } else {
+                            userModel.unfollowAnime(anime: anime)
+                        }
+                        
                     }) {
-                        Image(systemName: following ? "heart.fill" : "heart")
+                        Image(systemName: model.isFollowingAnime ? "heart.fill" : "heart")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30)
                     }
                 )
                 

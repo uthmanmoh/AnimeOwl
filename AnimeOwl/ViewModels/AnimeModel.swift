@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import Firebase
 
 class AnimeModel: ObservableObject {
     
     @Published var animes: Top?
     
     @Published var detailAnime: DetailAnime?
+    @Published var isFollowingAnime = false
     
     init() {
         
@@ -72,7 +74,10 @@ class AnimeModel: ObservableObject {
                     
                     DispatchQueue.main.async {
                         self.detailAnime = result
+                        self.checkFollowing(anime: self.detailAnime!)
                     }
+                    
+                    
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -83,6 +88,25 @@ class AnimeModel: ObservableObject {
         }
         
         task.resume()
+        
+    }
+    
+    /// Checks if the user is following given anime and sets self.isFollowingAnime accordingly
+    func checkFollowing(anime: DetailAnime) {
+        
+        let db = Firestore.firestore()
+        let reference = db.collection("users").document(Auth.auth().currentUser!.uid)
+        reference.getDocument { snapshot, error in
+            guard error == nil, snapshot != nil else {
+                print(error?.localizedDescription ?? "Error: Failed to get document info")
+                return
+            }
+            
+            let animeArray = snapshot!.data()?["followingAnimes"] as? [Int] ?? [Int]()
+            DispatchQueue.main.async {
+                self.isFollowingAnime = animeArray.contains(anime.id) ? true : false
+            }
+        }
         
     }
     

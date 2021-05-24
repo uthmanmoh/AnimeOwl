@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 struct CreateAccountForm: View {
     @EnvironmentObject var userModel: UserModel
@@ -23,9 +24,11 @@ struct CreateAccountForm: View {
             BackgroundColour()
             VStack {
                 Spacer()
+                
                 OwlLogo()
                     .padding(.bottom, 50)
                     .padding(.top, -20)
+                
                 // MARK: - Account info
                 VStack (alignment: .leading) {
                     Text("Create an Account")
@@ -86,13 +89,29 @@ struct CreateAccountForm: View {
             return
         }
         
+        if username == "" {
+            errorMessage = "Please fill out all details"
+            return
+        }
+        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             DispatchQueue.main.async {
-                if let error = error {
-                    errorMessage = error.localizedDescription
-                } else {
-                    userModel.loggedIn = true
+                
+                guard error == nil else {
+                    errorMessage = error!.localizedDescription
+                    return
                 }
+                
+                let user = Auth.auth().currentUser
+                let db = Firestore.firestore()
+                let reference = db.collection("users").document(user!.uid)
+                
+                reference.setData(["username": username], merge: true)
+                
+                let currentUser = userModel.user
+                currentUser.username = username
+                
+                userModel.checkLogin()
             }
         }
     }

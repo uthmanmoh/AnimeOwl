@@ -62,17 +62,13 @@ struct HomeView: View {
                 }
             }
             .accentColor(Color(.brown))
-            .cornerRadius(sideBarOpened ? 20 : 0)
-            .offset(x: sideBarOpened ? 300 : 0, y: sideBarOpened ? 50 : 0)
-            .scaleEffect(sideBarOpened ? 0.8 : 1)
-            .blur(radius: sideBarOpened ? 5 : 0)
+            .offset(x: sideBarOpened ? 300 : 0)
+            .blur(radius: sideBarOpened ? 3 : 0)
             .overlay(
                 Rectangle()
                     .foregroundColor(Color("button").opacity(0.01))
                     .frame(maxWidth: sideBarOpened ? .infinity : 0, maxHeight: sideBarOpened ? .infinity : 0)
-                    .cornerRadius(sideBarOpened ? 20 : 0)
-                    .offset(x: sideBarOpened ? 300 : 0, y: sideBarOpened ? 50 : 0)
-                    .scaleEffect(sideBarOpened ? 0.8 : 1)
+                    .offset(x: sideBarOpened ? 300 : 0)
                     .onTapGesture {
                         withAnimation(.spring()) {
                             sideBarOpened.toggle()

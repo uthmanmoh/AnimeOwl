@@ -36,7 +36,7 @@ struct SideMenu: View {
                 
                 VStack (alignment: .leading, spacing: 30) {
                     
-                    Text("SIDEBAR")
+                    Text(userModel.user.username)
                         .font(Font.custom("Avenir Heavy", size: 30))
                         .padding()
                         .border(Color(.label), width: 3)
