@@ -10,7 +10,7 @@ import Firebase
 
 class AnimeModel: ObservableObject {
     
-    @Published var animes: Top?
+    @Published var animes: TopAnimes?
     
     @Published var detailAnime: DetailAnime?
     @Published var isFollowingAnime = false
@@ -35,7 +35,7 @@ class AnimeModel: ObservableObject {
             if error == nil, let data = data {
                 
                 do {
-                    let result = try JSONDecoder().decode(Top.self, from: data)
+                    let result = try JSONDecoder().decode(TopAnimes.self, from: data)
                     
                     for anime in result.top {
                         anime.getImageData()

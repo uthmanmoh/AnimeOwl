@@ -74,7 +74,7 @@ struct LoginForm: View {
                         
                         Button("Continue as Guest") {
                             // Guest login
-                            userModel.loggedIn = true
+                            userModel.checkLogin()
                         }
                         
                         Spacer()

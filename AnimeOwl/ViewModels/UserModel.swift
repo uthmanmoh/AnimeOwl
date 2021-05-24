@@ -49,16 +49,6 @@ class UserModel: ObservableObject {
         }) {
             user.followingAnimes.append(anime.id)
             
-            let db = Firestore.firestore()
-            
-            let reference = db.collection("users").document(Auth.auth().currentUser!.uid)
-            
-            reference.updateData(["followingAnimes": FieldValue.arrayUnion([anime.id])]) { error in
-                if error != nil {
-                    print(error?.localizedDescription ?? "Error: failed to add \(anime.title) to database")
-                }
-            }
-            
         }
         
     }
@@ -76,15 +66,21 @@ class UserModel: ObservableObject {
                 }
             }
             
+        }
+        
+    }
+    
+    func saveData() {
+        
+        if let currentUser = Auth.auth().currentUser {
             let db = Firestore.firestore()
-            let reference = db.collection("users").document(Auth.auth().currentUser!.uid)
+            let reference = db.collection("users").document(currentUser.uid)
             
-            reference.updateData(["followingAnimes": FieldValue.arrayRemove([anime.id])]) { error in
+            reference.updateData(["followingAnimes": self.user.followingAnimes]) { error in
                 if error != nil {
-                    print(error?.localizedDescription ?? "Error: failed to add \(anime.title) to database")
+                    print(error?.localizedDescription ?? "Error writing followingAnimes to database")
                 }
             }
-            
         }
         
     }

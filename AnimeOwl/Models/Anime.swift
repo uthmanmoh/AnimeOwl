@@ -38,7 +38,7 @@
 
 import Foundation
 
-struct Top: Decodable {
+struct TopAnimes: Decodable {
     var top: [Anime]
 }
 

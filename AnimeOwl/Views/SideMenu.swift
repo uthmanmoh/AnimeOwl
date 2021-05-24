@@ -78,8 +78,9 @@ struct SideMenu: View {
                         }
                         Divider()
                         Button("Log Out") {
+                            userModel.saveData()
                             try? Auth.auth().signOut()
-                            userModel.loggedIn = false
+                            userModel.checkLogin()
                         }
                         .accentColor(Color(.brown))
                         .font(.system(.headline))

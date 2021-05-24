@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    @EnvironmentObject var userModel: UserModel
     @EnvironmentObject var model: AnimeModel
     @State private var sideBarOpened = false
     
@@ -64,10 +64,10 @@ struct HomeView: View {
             .accentColor(Color(.brown))
             .offset(x: sideBarOpened ? 300 : 0)
             .blur(radius: sideBarOpened ? 3 : 0)
+            .shadow(radius: sideBarOpened ? 15 : 0)
             .overlay(
                 Rectangle()
-                    .foregroundColor(Color("button").opacity(0.01))
-                    .frame(maxWidth: sideBarOpened ? .infinity : 0, maxHeight: sideBarOpened ? .infinity : 0)
+                    .foregroundColor(sideBarOpened ? Color("button").opacity(0.01) : .clear)
                     .offset(x: sideBarOpened ? 300 : 0)
                     .onTapGesture {
                         withAnimation(.spring()) {
@@ -91,6 +91,9 @@ struct HomeView: View {
                             })
                     )
             )
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { _ in
+                userModel.saveData()
+            })
         }
         .ignoresSafeArea()
         
