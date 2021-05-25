@@ -10,6 +10,6 @@ import Foundation
 class User {
     
     var username = ""
-    var followingAnimes = [Int]()
+    var followingAnimes = [Anime]()
     
 }

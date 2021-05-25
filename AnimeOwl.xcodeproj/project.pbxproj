@@ -11,6 +11,8 @@
 		008B1237265A07CB00E7193A /* DetailAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B1236265A07CB00E7193A /* DetailAnime.swift */; };
 		008B1239265B5F0D00E7193A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B1238265B5F0D00E7193A /* User.swift */; };
 		008B123B265B5F7F00E7193A /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B123A265B5F7F00E7193A /* UserService.swift */; };
+		008B123D265CA41800E7193A /* SideMenuOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B123C265CA41800E7193A /* SideMenuOptions.swift */; };
+		008B123F265CA77E00E7193A /* SideMenuOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B123E265CA77E00E7193A /* SideMenuOptionView.swift */; };
 		00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */; };
 		00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63726537B7900BD57EA /* Assets.xcassets */; };
 		00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */; };
@@ -37,6 +39,8 @@
 		008B1236265A07CB00E7193A /* DetailAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAnime.swift; sourceTree = "<group>"; };
 		008B1238265B5F0D00E7193A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		008B123A265B5F7F00E7193A /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		008B123C265CA41800E7193A /* SideMenuOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptions.swift; sourceTree = "<group>"; };
+		008B123E265CA77E00E7193A /* SideMenuOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionView.swift; sourceTree = "<group>"; };
 		00AAC63026537B7700BD57EA /* AnimeOwl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeOwl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeOwlApp.swift; sourceTree = "<group>"; };
 		00AAC63726537B7900BD57EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			children = (
 				00AAC64A26537BBE00BD57EA /* TabsView.swift */,
 				00CDFF312658B250000E88C8 /* SideMenu.swift */,
+				008B123E265CA77E00E7193A /* SideMenuOptionView.swift */,
 				00CDFF2F26573100000E88C8 /* HomeView.swift */,
 				00CDFF2B26562973000E88C8 /* AnimeCard.swift */,
 				00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */,
@@ -153,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				00CDFF2926560C72000E88C8 /* Constants.swift */,
+				008B123C265CA41800E7193A /* SideMenuOptions.swift */,
 				008B123A265B5F7F00E7193A /* UserService.swift */,
 			);
 			path = Helpers;
@@ -326,7 +332,9 @@
 				008B12352659A5B600E7193A /* ErrorMessage.swift in Sources */,
 				008B1239265B5F0D00E7193A /* User.swift in Sources */,
 				00AAC6602653A1CA00BD57EA /* OwlLogo.swift in Sources */,
+				008B123F265CA77E00E7193A /* SideMenuOptionView.swift in Sources */,
 				00CDFF382658DC35000E88C8 /* UserModel.swift in Sources */,
+				008B123D265CA41800E7193A /* SideMenuOptions.swift in Sources */,
 				00CDFF2A26560C72000E88C8 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

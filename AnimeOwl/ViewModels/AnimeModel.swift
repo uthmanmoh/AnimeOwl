@@ -10,17 +10,17 @@ import Firebase
 
 class AnimeModel: ObservableObject {
     
+    // Anime info
     @Published var animes: TopAnimes?
     
     @Published var detailAnime: DetailAnime?
     @Published var isFollowingAnime = false
     
-    init() {
-        
-        getTopAnime()
-        
-    }
+    // User info
+    @Published var loggedIn = false
+    @Published var user = User()
     
+    // MARK: - Anime Data Methods
     func getTopAnime() {
 
         let url = URL(string: "\(Constants.API_URL)/top/anime/1")!
@@ -91,21 +91,101 @@ class AnimeModel: ObservableObject {
         
     }
     
-    /// Checks if the user is following given anime and sets self.isFollowingAnime accordingly
-    func checkFollowing(anime: DetailAnime) {
+    
+    // MARK: - User Methods
+    func checkLogin() {
+        loggedIn = Auth.auth().currentUser == nil ? false: true
+        
+        if self.user.username == "" {
+            getUserData()
+        }
+    }
+    
+    func getUserData() {
+        
+        guard Auth.auth().currentUser != nil else { return }
         
         let db = Firestore.firestore()
         let reference = db.collection("users").document(Auth.auth().currentUser!.uid)
         reference.getDocument { snapshot, error in
             guard error == nil, snapshot != nil else {
-                print(error?.localizedDescription ?? "Error: Failed to get document info")
+                print(error?.localizedDescription ?? "Error getting document")
                 return
             }
             
-            let animeArray = snapshot!.data()?["followingAnimes"] as? [Int] ?? [Int]()
-            DispatchQueue.main.async {
-                self.isFollowingAnime = animeArray.contains(anime.id) ? true : false
+            let data = snapshot!.data()
+            self.user.username = data?["username"] as? String ?? ""
+            
+            if let databaseInfo = data?["followingAnimes"] as? [[String: Any]] {
+            
+                // Set self.user.followingAnimes to the data from database
+                for a in databaseInfo {
+                    let newAnime = Anime(id: a["id"] as! Int, url: a["url"] as! String, imageUrl: a["imageUrl"] as? String? ?? nil, title: a["title"] as! String, type: a["type"] as! String, score: a["score"] as! Double, startDate: a["startDate"] as? String? ?? nil, endDate: a["endDate"] as? String? ?? nil, members: a["members"] as! Int, rank: a["rank"] as! Int, episodes: a["episodes"] as! Int)
+                    
+                    self.user.followingAnimes.append(newAnime)
+                }
             }
+            
+        }
+        
+    }
+    
+    func saveUserData() {
+        
+        if let currentUser = Auth.auth().currentUser {
+            let db = Firestore.firestore()
+            let reference = db.collection("users").document(currentUser.uid)
+            
+            var animesArray = [[String: Any]]()
+            for anime in user.followingAnimes {
+                animesArray.append(["id": anime.id, "url": anime.url, "imageUrl": anime.imageUrl as Any, "title": anime.title, "type": anime.type, "score": anime.score, "startDate": anime.startDate as Any, "endDate": anime.endDate as Any, "members": anime.members, "rank": anime.rank, "episodes": anime.episodes])
+                
+            }
+            
+            
+            reference.setData(["followingAnimes": animesArray], merge: false) { error in
+                if error != nil {
+                    print(error?.localizedDescription ?? "Error setting data in AnimeModel.saveUserData()")
+                }
+            }
+        }
+        
+    }
+    
+    func followAnime(anime: DetailAnime) {
+        
+        if !user.followingAnimes.contains(where: { eachAnime in
+            eachAnime.id == anime.id
+        }) {
+            
+            let toFollowAnimes = Anime(id: anime.id, url: anime.url, imageUrl: anime.imageUrl, title: anime.title, type: anime.type, score: anime.score, members: anime.members, rank: anime.rank, episodes: anime.episodes)
+            user.followingAnimes.append(toFollowAnimes)
+        }
+        
+    }
+    
+    func unfollowAnime(anime: DetailAnime) {
+        
+        if user.followingAnimes.contains(where: { eachAnime in
+            eachAnime.id == anime.id
+        }) {
+            // Remove anime from user.followingAnimes
+            for index in 0 ..< user.followingAnimes.count {
+                if user.followingAnimes[index].id == anime.id {
+                    user.followingAnimes.remove(at: index)
+                    break
+                }
+            }
+            
+        }
+        
+    }
+    
+    func checkFollowing(anime: DetailAnime) {
+        DispatchQueue.main.async {
+            self.isFollowingAnime = self.user.followingAnimes.contains(where: { eachAnime in
+                eachAnime.id == anime.id
+            })
         }
         
     }

@@ -9,14 +9,14 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginForm: View {
-    @EnvironmentObject var userModel: UserModel
+    @EnvironmentObject var model: AnimeModel
     
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage: String?
     
     var body: some View {
-        if !userModel.loggedIn {
+        if !model.loggedIn {
             NavigationView {
                 ZStack {
                     BackgroundColour()
@@ -74,10 +74,13 @@ struct LoginForm: View {
                         
                         Button("Continue as Guest") {
                             // Guest login
-                            userModel.checkLogin()
+                            model.checkLogin()
                         }
                         
                         Spacer()
+                    }
+                    .onAppear {
+                        resetInfo()
                     }
                     .padding(.top, 50)
                 }
@@ -87,12 +90,9 @@ struct LoginForm: View {
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .accentColor(Color(.brown))
-            .onAppear {
-                resetInfo()
-            }
-        } else {
+        }
+        else {
             HomeView()
-                .environmentObject(AnimeModel())
         }
     }
     
@@ -104,9 +104,9 @@ struct LoginForm: View {
                     return
                 }
                 
-                userModel.checkLogin()
+                model.getUserData()
                 
-                userModel.getUserData()
+                model.checkLogin()
             }
         }
     }
@@ -115,7 +115,7 @@ struct LoginForm: View {
         email = ""
         password = ""
         errorMessage = ""
-        userModel.checkLogin()
+        model.checkLogin()
     }
     
 }

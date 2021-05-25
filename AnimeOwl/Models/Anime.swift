@@ -76,6 +76,21 @@ class Anime: Decodable, Identifiable, ObservableObject {
         
     }
     
+    init(id: Int, url: String, imageUrl: String? = nil, title: String, type: String, score: Double,
+         startDate: String? = nil, endDate: String? = nil, members: Int, rank: Int, episodes: Int) {
+        self.id = id
+        self.url = url
+        self.imageUrl = imageUrl
+        self.title = title
+        self.type = type
+        self.score = score
+        self.startDate = startDate
+        self.endDate = endDate
+        self.members = members
+        self.rank = rank
+        self.episodes = episodes
+    }
+    
     func getImageData() {
         guard imageUrl != nil else { return }
         

@@ -10,7 +10,7 @@ import FirebaseAuth
 import Firebase
 
 struct CreateAccountForm: View {
-    @EnvironmentObject var userModel: UserModel
+    @EnvironmentObject var model: AnimeModel
     
     @State private var email = ""
     @State private var username = ""
@@ -108,10 +108,12 @@ struct CreateAccountForm: View {
                 
                 reference.setData(["username": username], merge: true)
                 
-                let currentUser = userModel.user
+                model.user = User()
+                
+                let currentUser = model.user
                 currentUser.username = username
                 
-                userModel.checkLogin()
+                model.checkLogin()
             }
         }
     }

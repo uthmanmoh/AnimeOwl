@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var userModel: UserModel
     @EnvironmentObject var model: AnimeModel
     @State private var sideBarOpened = false
     
@@ -39,6 +38,9 @@ struct HomeView: View {
                             .padding(.horizontal)
                         }
                     }
+                    .onAppear {
+                       sideBarOpened = false
+                    }
                     .navigationBarTitle("Top Anime")
                     .navigationBarItems(leading:
                         Button(action: {
@@ -61,13 +63,15 @@ struct HomeView: View {
                     ProgressView()
                 }
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .accentColor(Color(.brown))
             .offset(x: sideBarOpened ? 300 : 0)
             .blur(radius: sideBarOpened ? 3 : 0)
             .shadow(radius: sideBarOpened ? 15 : 0)
             .overlay(
                 Rectangle()
-                    .foregroundColor(sideBarOpened ? Color("button").opacity(0.01) : .clear)
+                    .foregroundColor(Color("button").opacity(0.01))
+                    .frame(maxWidth: sideBarOpened ? .infinity : 0, maxHeight: sideBarOpened ? .infinity : 0)
                     .offset(x: sideBarOpened ? 300 : 0)
                     .onTapGesture {
                         withAnimation(.spring()) {
@@ -91,8 +95,11 @@ struct HomeView: View {
                             })
                     )
             )
+            .onAppear {
+                model.getTopAnime()
+            }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { _ in
-                userModel.saveData()
+                model.saveUserData()
             })
         }
         .ignoresSafeArea()
