@@ -19,6 +19,7 @@
 		008B1247265CC4F500E7193A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B1246265CC4F500E7193A /* ProfileView.swift */; };
 		008B1249265CC51600E7193A /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B1248265CC51600E7193A /* CalendarView.swift */; };
 		008B124B265CC53200E7193A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B124A265CC53200E7193A /* SettingsView.swift */; };
+		008B124E265CCA7700E7193A /* AnimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B124D265CCA7700E7193A /* AnimeList.swift */; };
 		00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */; };
 		00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63726537B7900BD57EA /* Assets.xcassets */; };
 		00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */; };
@@ -36,7 +37,6 @@
 		00CDFF3026573100000E88C8 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF2F26573100000E88C8 /* SelectionView.swift */; };
 		00CDFF322658B250000E88C8 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF312658B250000E88C8 /* SideMenu.swift */; };
 		00CDFF362658C38E000E88C8 /* AnimeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */; };
-		00CDFF382658DC35000E88C8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF372658DC35000E88C8 /* UserModel.swift */; };
 		9D9E0612C3422745C84A5E87 /* Pods_AnimeOwl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +53,7 @@
 		008B1246265CC4F500E7193A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		008B1248265CC51600E7193A /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		008B124A265CC53200E7193A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		008B124D265CCA7700E7193A /* AnimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeList.swift; sourceTree = "<group>"; };
 		00AAC63026537B7700BD57EA /* AnimeOwl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeOwl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeOwlApp.swift; sourceTree = "<group>"; };
 		00AAC63726537B7900BD57EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,7 +73,6 @@
 		00CDFF2F26573100000E88C8 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		00CDFF312658B250000E88C8 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailView.swift; sourceTree = "<group>"; };
-		00CDFF372658DC35000E88C8 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0915A78C1907C7402CE23399 /* Pods_AnimeOwl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimeOwl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D491E9B5E5A2E402E04AC10 /* Pods-AnimeOwl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.release.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.release.xcconfig"; sourceTree = "<group>"; };
 		B099514FEF3C754AACF689AE /* Pods-AnimeOwl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimeOwl.debug.xcconfig"; path = "Target Support Files/Pods-AnimeOwl/Pods-AnimeOwl.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +99,7 @@
 				008B1244265CC49F00E7193A /* SearchView.swift */,
 				008B1246265CC4F500E7193A /* ProfileView.swift */,
 				008B1248265CC51600E7193A /* CalendarView.swift */,
+				008B124A265CC53200E7193A /* SettingsView.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -125,8 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */,
-				00AAC64926537BBE00BD57EA /* Views */,
 				00AAC64526537BBE00BD57EA /* ViewModels */,
+				00AAC64926537BBE00BD57EA /* Views */,
 				00AAC64226537BA300BD57EA /* Models */,
 				00CDFF2826560C5F000E88C8 /* Helpers */,
 				00AAC63726537B7900BD57EA /* Assets.xcassets */,
@@ -159,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				00AAC64726537BBE00BD57EA /* AnimeModel.swift */,
-				00CDFF372658DC35000E88C8 /* UserModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -173,7 +173,6 @@
 				008B124C265CC56400E7193A /* Pages */,
 				00CDFF332658B35D000E88C8 /* Account */,
 				00CDFF342658B37E000E88C8 /* Common */,
-				008B124A265CC53200E7193A /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +200,7 @@
 		00CDFF342658B37E000E88C8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				008B124D265CCA7700E7193A /* AnimeList.swift */,
 				00CDFF2B26562973000E88C8 /* AnimeCard.swift */,
 				00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */,
 				00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */,
@@ -355,6 +355,7 @@
 				00AAC64426537BA300BD57EA /* Anime.swift in Sources */,
 				00CDFF2E2657034A000E88C8 /* BackgroundColour.swift in Sources */,
 				00AAC65E26538F7F00BD57EA /* CreateAccountForm.swift in Sources */,
+				008B124E265CCA7700E7193A /* AnimeList.swift in Sources */,
 				00CDFF322658B250000E88C8 /* SideMenu.swift in Sources */,
 				00AAC6622653A79E00BD57EA /* HomeButton.swift in Sources */,
 				00CDFF3026573100000E88C8 /* SelectionView.swift in Sources */,
@@ -365,7 +366,6 @@
 				008B124B265CC53200E7193A /* SettingsView.swift in Sources */,
 				008B1243265CC20100E7193A /* HomeView.swift in Sources */,
 				008B123F265CA77E00E7193A /* SideMenuOptionView.swift in Sources */,
-				00CDFF382658DC35000E88C8 /* UserModel.swift in Sources */,
 				008B123D265CA41800E7193A /* SideMenuOptions.swift in Sources */,
 				00CDFF2A26560C72000E88C8 /* Constants.swift in Sources */,
 			);

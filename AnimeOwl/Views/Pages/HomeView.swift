@@ -12,21 +12,11 @@ struct HomeView: View {
     
     @Binding var sideBarOpened: Bool
     
-    private let gridItems = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
     var body: some View {
-        if model.animes != nil {
+        if model.topAnimes != nil {
             ZStack {
                 BackgroundColour()
-                ScrollView(showsIndicators: false) {
-                    LazyVGrid (columns: gridItems) {
-                        ForEach(model.animes!.top) { anime in
-                            AnimeCard(anime: anime)
-                                .padding(.horizontal, 3)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
+                AnimeList(animes: model.topAnimes!.top)
             }
             .navigationBarTitle("Top Anime") ////////////////////// TEMPORARY
         } else {

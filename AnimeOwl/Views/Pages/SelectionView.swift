@@ -41,8 +41,11 @@ struct SelectionView: View {
                     else if currentView == .profile {
                         ProfileView()
                     }
-                    else { // settings
+                    else if currentView == .settings {
                         SettingsView()
+                    }
+                    else { // log out
+                        
                     }
                 }
                 .navigationBarTitle(currentView.title)

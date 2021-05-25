@@ -11,7 +11,7 @@ struct SettingsView: View {
     var body: some View {
         ZStack {
             BackgroundColour()
-            Text("SettingsView")
+            Text("Settings View")
         }
     }
 }

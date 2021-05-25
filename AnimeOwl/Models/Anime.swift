@@ -89,6 +89,8 @@ class Anime: Decodable, Identifiable, ObservableObject {
         self.members = members
         self.rank = rank
         self.episodes = episodes
+        
+        getImageData()
     }
     
     func getImageData() {

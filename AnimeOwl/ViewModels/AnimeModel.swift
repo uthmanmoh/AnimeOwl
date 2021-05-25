@@ -11,7 +11,8 @@ import Firebase
 class AnimeModel: ObservableObject {
     
     // Anime info
-    @Published var animes: TopAnimes?
+    @Published var topAnimes: TopAnimes?
+    @Published var followingAnimes: [Anime] = [Anime]()
     
     @Published var detailAnime: DetailAnime?
     @Published var isFollowingAnime = false
@@ -42,7 +43,7 @@ class AnimeModel: ObservableObject {
                     }
                     
                     DispatchQueue.main.async {
-                        self.animes = result
+                        self.topAnimes = result
                     }
                 } catch {
                     print(error.localizedDescription)
@@ -93,6 +94,14 @@ class AnimeModel: ObservableObject {
     
     
     // MARK: - User Methods
+    
+    /// sets self.followingAnimes based on user.followingAnimes
+    func setFollowingAnimes() {
+        DispatchQueue.main.async {
+            self.followingAnimes = self.user.followingAnimes
+        }
+    }
+    
     func checkLogin() {
         loggedIn = Auth.auth().currentUser == nil ? false: true
         
@@ -142,8 +151,7 @@ class AnimeModel: ObservableObject {
                 
             }
             
-            
-            reference.setData(["followingAnimes": animesArray], merge: false) { error in
+            reference.updateData(["followingAnimes": animesArray]) { error in
                 if error != nil {
                     print(error?.localizedDescription ?? "Error setting data in AnimeModel.saveUserData()")
                 }

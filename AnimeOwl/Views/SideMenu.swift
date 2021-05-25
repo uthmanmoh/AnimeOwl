@@ -35,13 +35,14 @@ struct SideMenu: View {
             //            .padding(.top, 60)
             
             
-            VStack {
+            VStack (alignment: .leading) {
                 
                 Text(model.user.username)
                     .font(Font.custom("Avenir Heavy", size: 30))
                     .padding()
                     .border(Color(.label), width: 3)
-                    .padding([.leading, .top], 40)
+                    .padding(.top, 40)
+                    .padding()
                 
                 ForEach(SideMenuOptions.allCases, id: \.self) { option in
                     SideMenuOptionView(option: option)

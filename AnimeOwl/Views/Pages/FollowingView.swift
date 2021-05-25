@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct FollowingView: View {
+    @EnvironmentObject var model: AnimeModel
+    
     var body: some View {
         ZStack {
             BackgroundColour()
-            Text("Following View")
+            AnimeList(animes: model.followingAnimes)
+        }
+        .onAppear {
+            model.setFollowingAnimes()
         }
     }
 }
 
-struct FollowingView_Previews: PreviewProvider {
-    static var previews: some View {
-        FollowingView()
-    }
-}
+//struct FollowingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FollowingView()
+//    }
+//}

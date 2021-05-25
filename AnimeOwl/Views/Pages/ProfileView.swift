@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var model: AnimeModel
+    
     var body: some View {
         ZStack {
             BackgroundColour()
-            Text("Profile View")
+            Text("Welcome \(model.user.username)")
+                .font(.system(size: 45, weight: .semibold))
         }
     }
 }
