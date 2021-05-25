@@ -39,20 +39,25 @@ struct AnimeDetailView: View {
                 .frame(width: UIScreen.main.bounds.maxX-40, height: UIScreen.main.bounds.maxY-200)
                 .navigationTitle(anime.title)
                 .navigationBarItems(trailing:
-                    Button(action: {
-                        model.isFollowingAnime.toggle()
-                        
-                        if model.isFollowingAnime {
-                            model.followAnime(anime: anime)
-                        } else {
-                            model.unfollowAnime(anime: anime)
+                    VStack {
+                        Button(action: {
+                            model.isFollowingAnime.toggle()
+                            
+                            if model.isFollowingAnime {
+                                model.followAnime(anime: anime)
+                            } else {
+                                model.unfollowAnime(anime: anime)
+                            }
+                            
+                        }) {
+                            Image(systemName: model.isFollowingAnime ? "heart.fill" : "heart")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30)
                         }
-                        
-                    }) {
-                        Image(systemName: model.isFollowingAnime ? "heart.fill" : "heart")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30)
+                        Text("Follow")
+                            .font(.caption)
+                            .padding(.top, -8)
                     }
                 )
                 
