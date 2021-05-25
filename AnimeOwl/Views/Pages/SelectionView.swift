@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  SelectionView.swift
 //  AnimeOwl
 //
 //  Created by Uthman Mohamed on 2021-05-20.
@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct SelectionView: View {
     @EnvironmentObject var model: AnimeModel
     @State private var sideBarOpened = false
     
-    private let gridItems = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    @State var currentView: SideMenuOptions = .home
+    
     
     init() {
         UINavigationBar.appearance().barTintColor = UIColor.init(Color("button"))
@@ -20,48 +21,48 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             if sideBarOpened {
-                SideMenu(width: 300, sideBarOpened: $sideBarOpened)
+                SideMenu(width: 300, sideBarOpened: $sideBarOpened, currentView: $currentView)
             }
             
             NavigationView {
-                if model.animes != nil {
-                    ZStack {
-                        BackgroundColour()
-                            .ignoresSafeArea()
-                        ScrollView(showsIndicators: false) {
-                            LazyVGrid (columns: gridItems) {
-                                ForEach(model.animes!.top) { anime in
-                                    AnimeCard(anime: anime)
-                                        .padding(.horizontal, 3)
-                                }
-                            }
-                            .padding(.horizontal)
-                        }
+                Group {
+                    if currentView == .home {
+                        HomeView(sideBarOpened: $sideBarOpened)
                     }
-                    .onAppear {
-                       sideBarOpened = false
+                    else if currentView == .following {
+                        FollowingView()
                     }
-                    .navigationBarTitle("Top Anime")
-                    .navigationBarItems(leading:
-                        Button(action: {
-                            withAnimation(.spring()){
-                                sideBarOpened.toggle()
-                            }
-                        }) {
-                            ZStack {
-                                Circle()
-                                    .foregroundColor(Color("button"))
-                                    .frame(width: 45, height: 45)
-                                    .shadow(color: .black.opacity(2) ,radius: 10)
-                                    .blur(radius: 1)
-                                Text("🦉")
-                                    .font(.system(size: 27))
-                            }
-                        }
-                    )
-                } else {
-                    ProgressView()
+                    else if currentView == .calendar {
+                        CalendarView()
+                    }
+                    else if currentView == .search {
+                        SearchView()
+                    }
+                    else if currentView == .profile {
+                        ProfileView()
+                    }
+                    else { // settings
+                        SettingsView()
+                    }
                 }
+                .navigationBarTitle(currentView.title)
+                .navigationBarItems(leading:
+                    Button(action: {
+                        withAnimation(.spring()){
+                            sideBarOpened = true
+                        }
+                    }) {
+                        ZStack {
+                            Circle()
+                                .foregroundColor(Color("button"))
+                                .frame(width: 45, height: 45)
+                                .shadow(color: .black.opacity(2) ,radius: 10)
+                                .blur(radius: 1)
+                            Text("🦉")
+                                .font(.system(size: 27))
+                        }
+                    }
+                )
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .accentColor(Color(.brown))
@@ -109,6 +110,6 @@ struct HomeView: View {
 //
 //struct HomeView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        HomeView()
+//        SelectionView()
 //    }
 //}

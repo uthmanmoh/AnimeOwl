@@ -13,6 +13,7 @@ struct BackgroundColour: View {
             Color.white
             LinearGradient(gradient: Gradient(colors: [Color("button").opacity(0.8), Color("background").opacity(0.8)]), startPoint: .topLeading, endPoint: .bottomTrailing)
         }
+        .ignoresSafeArea()
     }
 }
 

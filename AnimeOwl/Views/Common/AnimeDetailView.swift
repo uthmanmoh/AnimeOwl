@@ -14,7 +14,6 @@ struct AnimeDetailView: View {
         if let anime = model.detailAnime {
             ZStack {
                 BackgroundColour()
-                    .ignoresSafeArea()
                 
                 let uiImage = UIImage(data: anime.imageData ?? Data())
                 Image(uiImage: uiImage ?? UIImage())
@@ -64,7 +63,6 @@ struct AnimeDetailView: View {
                 BackgroundColour()
                 ProgressView()
             }
-            .ignoresSafeArea()
         }
     }
 }

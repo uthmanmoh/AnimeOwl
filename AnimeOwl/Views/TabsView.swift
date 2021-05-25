@@ -18,7 +18,7 @@ struct TabsView: View {
     
     var body: some View {
         TabView (selection: $tabSelected) {
-            HomeView()
+            SelectionView()
                 .tabItem {
                     VStack {
                         Image(systemName: "house")

@@ -84,7 +84,6 @@ struct LoginForm: View {
                     }
                     .padding(.top, 50)
                 }
-                .ignoresSafeArea()
                 .navigationBarTitle("Login")
                 .navigationBarHidden(true)
             }
@@ -92,7 +91,7 @@ struct LoginForm: View {
             .accentColor(Color(.brown))
         }
         else {
-            HomeView()
+            SelectionView()
         }
     }
     

@@ -79,7 +79,6 @@ struct CreateAccountForm: View {
         .onAppear {
             resetInfo()
         }
-        .ignoresSafeArea()
         
     }
     

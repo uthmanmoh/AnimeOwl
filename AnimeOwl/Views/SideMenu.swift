@@ -14,6 +14,8 @@ struct SideMenu: View {
     let width: CGFloat
     @Binding var sideBarOpened: Bool
     
+    @Binding var currentView: SideMenuOptions
+    
     var body: some View {
         ZStack (alignment: .topTrailing) {
             Color("button")
@@ -43,6 +45,13 @@ struct SideMenu: View {
                 
                 ForEach(SideMenuOptions.allCases, id: \.self) { option in
                     SideMenuOptionView(option: option)
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                sideBarOpened = false
+                            }
+                                self.currentView = option
+                        }
+                    Divider()
                 }
                 
                                         Button("Log Out") {
