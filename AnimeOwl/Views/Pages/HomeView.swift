@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var model: AnimeModel
     
-    @Binding var sideBarOpened: Bool
+    @Binding var sideMenuOpened: Bool
     
     var body: some View {
         if model.topAnimes != nil {

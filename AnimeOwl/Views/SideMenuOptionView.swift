@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SideMenuOptionView: View {
     var option: SideMenuOptions
+    var isCurrent: Bool = false
     
     var body: some View {
         HStack (spacing: 15) {
@@ -23,6 +24,9 @@ struct SideMenuOptionView: View {
         }
         .foregroundColor(Color(.label))
         .padding()
+        .background(isCurrent ? Color(.brown) : .clear)
+        .animation(.spring(response: 0.1))
+        .cornerRadius(25)
     }
 }
 

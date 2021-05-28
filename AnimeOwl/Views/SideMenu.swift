@@ -12,7 +12,7 @@ struct SideMenu: View {
     @EnvironmentObject var model: AnimeModel
     
     let width: CGFloat
-    @Binding var sideBarOpened: Bool
+    @Binding var sideMenuOpened: Bool
     
     @Binding var currentView: SideMenuOptions
     
@@ -25,7 +25,7 @@ struct SideMenu: View {
             
             //            Button(action :{
             //                withAnimation(.spring()) {
-            //                    sideBarOpened.toggle()
+            //                    sideMenuOpened.toggle()
             //                }
             //            }) {
             //                Image(systemName: "xmark")
@@ -50,10 +50,10 @@ struct SideMenu: View {
                         .padding(.trailing)
                     
                     ForEach(SideMenuOptions.allCases.dropLast(), id: \.self) { option in
-                        SideMenuOptionView(option: option)
+                        SideMenuOptionView(option: option, isCurrent: currentView == option)
                             .onTapGesture {
                                 withAnimation(.spring()) {
-                                    sideBarOpened = false
+                                    sideMenuOpened = false
                                 }
                                     self.currentView = option
                             }
@@ -77,23 +77,18 @@ struct SideMenu: View {
                         }))
                     }
                     
-//                                                                Button("Log Out") {
-//                                                                    model.saveUserData()
-//                                                                    try? Auth.auth().signOut()
-//                                                                    model.checkLogin()
-//                                                                }
-                    
-                    Spacer()
                 }
             }
             .padding()
         }
+        .frame(width: width)
+        .padding(.leading, -(UIScreen.main.bounds.width - width))
     }
 }
 
 
 //struct SideMenu_Previews: PreviewProvider {
 //    static var previews: some View {
-//        SideMenu(width: UIScreen.main.bounds.width, sideBarOpened: .constant(true))
+//        SideMenu(width: UIScreen.main.bounds.width, sideMenuOpened: .constant(true))
 //    }
 //}

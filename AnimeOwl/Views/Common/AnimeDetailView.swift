@@ -10,36 +10,23 @@ import SwiftUI
 struct AnimeDetailView: View {
     @EnvironmentObject var model: AnimeModel
     
+    @State private var isLoading: Bool = true
+    
     var body: some View {
         if let anime = model.detailAnime {
             ZStack {
                 BackgroundColour()
+                    .opacity(0.15)
                 
-                let uiImage = UIImage(data: anime.imageData ?? Data())
-                Image(uiImage: uiImage ?? UIImage())
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-                    .frame(width: UIScreen.main.bounds.maxX, height: UIScreen.main.bounds.maxY)
-                    .opacity(0.3)
-                    .blur(radius: 2)
-                
-                ScrollView {
-                    VStack {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text(anime.title)
+                            .font(Font.custom("Avenir Heavy", size: 35))
+                            .padding(.leading, 20)
                         
-                        VStack (alignment: .leading, spacing: 10) {
-                            Text("This anime is rated #\(anime.rank) on MyAnimeList with \(anime.score, specifier: "%.2f") stars")
-                            Text("It has \(anime.episodes) episodes starting")
-                            Text("description: \(anime.synopsis)")
-                        }
-                        .padding(.top)
-                        .font(.system(size: 20, weight: .medium))
-                    }
-                }
-                .frame(width: UIScreen.main.bounds.maxX-40, height: UIScreen.main.bounds.maxY-200)
-                .navigationTitle(anime.title)
-                .navigationBarItems(trailing:
-                    VStack {
+                        Spacer()
+                        
                         Button(action: {
                             model.isFollowingAnime.toggle()
                             
@@ -48,19 +35,49 @@ struct AnimeDetailView: View {
                             } else {
                                 model.unfollowAnime(anime: anime)
                             }
-                            
                         }) {
-                            Image(systemName: model.isFollowingAnime ? "heart.fill" : "heart")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30)
+                            VStack (spacing: 0) {
+                                Image(systemName: model.isFollowingAnime ? "star.fill" : "star")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(Color(.systemYellow))
+                                
+                                Text("Follow")
+                                    .font(.caption)
+                            }
                         }
-                        Text("Follow")
-                            .font(.caption)
-                            .padding(.top, -8)
+                        .padding(.trailing, 15)
+                        .padding(.bottom, -50)
                     }
-                )
-                
+                    
+                    ScrollView {
+                        
+                        VStack (alignment: .leading, spacing: 10) {
+                            Text("This anime is rated #\(anime.rank) on MyAnimeList with \(anime.score, specifier: "%.2f") stars")
+                            Text("It has \(anime.episodes) episodes lasting \(anime.duration) long")
+                            Text("Status: \(anime.status)")
+                            Text("Rating: \(anime.rating)")
+                            
+                        }
+                        .padding(.top)
+                        .font(.system(size: 20, weight: .medium))
+                    }
+                    .frame(width: UIScreen.main.bounds.maxX-40, height: UIScreen.main.bounds.maxY-200)
+                }
+                .redacted(reason: isLoading ? .placeholder : [])
+            }
+            .background(Image(uiImage: UIImage(data: anime.imageData ?? Data()) ?? UIImage())
+                            .resizable()
+                            .ignoresSafeArea()
+                            .scaledToFill()
+                            .opacity(0.3)
+                            .blur(radius: 2)
+                            .redacted(reason: isLoading ? .placeholder : []))
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
+                    self.isLoading = false
+                }
             }
         }
         else {

@@ -129,7 +129,17 @@ class AnimeModel: ObservableObject {
             
                 // Set self.user.followingAnimes to the data from database
                 for a in databaseInfo {
-                    let newAnime = Anime(id: a["id"] as! Int, url: a["url"] as! String, imageUrl: a["imageUrl"] as? String? ?? nil, title: a["title"] as! String, type: a["type"] as! String, score: a["score"] as! Double, startDate: a["startDate"] as? String? ?? nil, endDate: a["endDate"] as? String? ?? nil, members: a["members"] as! Int, rank: a["rank"] as! Int, episodes: a["episodes"] as! Int)
+                    let newAnime = Anime(id: a["id"] as! Int,
+                                         url: a["url"] as! String,
+                                         imageUrl: a["imageUrl"] as? String? ?? nil,
+                                         title: a["title"] as! String,
+                                         type: a["type"] as! String,
+                                         score: a["score"] as! Double,
+                                         startDate: a["startDate"] as? String? ?? nil,
+                                         endDate: a["endDate"] as? String? ?? nil,
+                                         members: a["members"] as! Int,
+                                         rank: a["rank"] as! Int,
+                                         episodes: a["episodes"] as! Int)
                     
                     self.user.followingAnimes.append(newAnime)
                 }
@@ -151,7 +161,7 @@ class AnimeModel: ObservableObject {
                 
             }
             
-            reference.updateData(["followingAnimes": animesArray]) { error in
+            reference.setData(["followingAnimes": animesArray, "username": user.username]) { error in
                 if error != nil {
                     print(error?.localizedDescription ?? "Error setting data in AnimeModel.saveUserData()")
                 }

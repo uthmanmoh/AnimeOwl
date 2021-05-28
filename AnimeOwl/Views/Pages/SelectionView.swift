@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SelectionView: View {
     @EnvironmentObject var model: AnimeModel
-    @State private var sideBarOpened = false
+    @State private var sideMenuOpened = false
     
     @State var currentView: SideMenuOptions = .home
     
@@ -20,14 +20,14 @@ struct SelectionView: View {
     
     var body: some View {
         ZStack {
-            if sideBarOpened {
-                SideMenu(width: 300, sideBarOpened: $sideBarOpened, currentView: $currentView)
+            if sideMenuOpened {
+                SideMenu(width: 300, sideMenuOpened: $sideMenuOpened, currentView: $currentView)
             }
             
             NavigationView {
                 Group {
                     if currentView == .home {
-                        HomeView(sideBarOpened: $sideBarOpened)
+                        HomeView(sideMenuOpened: $sideMenuOpened)
                     }
                     else if currentView == .following {
                         FollowingView()
@@ -52,7 +52,7 @@ struct SelectionView: View {
                 .navigationBarItems(leading:
                     Button(action: {
                         withAnimation(.spring()){
-                            sideBarOpened = true
+                            sideMenuOpened = true
                         }
                     }) {
                         ZStack {
@@ -69,17 +69,18 @@ struct SelectionView: View {
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .accentColor(Color(.brown))
-            .offset(x: sideBarOpened ? 300 : 0)
-            .blur(radius: sideBarOpened ? 3 : 0)
-            .shadow(radius: sideBarOpened ? 15 : 0)
+            .offset(x: sideMenuOpened ? 300 : 0)
+            .blur(radius: sideMenuOpened ? 3 : 0)
+            .shadow(radius: sideMenuOpened ? 15 : 0)
             .overlay(
                 Rectangle()
-                    .foregroundColor(Color("button").opacity(0.01))
-                    .frame(maxWidth: sideBarOpened ? .infinity : 0, maxHeight: sideBarOpened ? .infinity : 0)
-                    .offset(x: sideBarOpened ? 300 : 0)
+                    .foregroundColor(Color(.black).opacity(0.01))
+                    .animation(.none)
+                    .frame(maxWidth: sideMenuOpened ? .infinity : 0, maxHeight: sideMenuOpened ? .infinity : 0)
+                    .offset(x: sideMenuOpened ? 300 : 0)
                     .onTapGesture {
                         withAnimation(.spring()) {
-                            sideBarOpened.toggle()
+                            sideMenuOpened = false
                         }
                     }
                     .gesture(
@@ -87,14 +88,14 @@ struct SelectionView: View {
                             .onChanged{ value in
                                 if value.translation != CGSize.zero {
                                     withAnimation(.spring()) {
-                                        sideBarOpened.toggle()
+                                        sideMenuOpened = false
                                     }
                                 }
                             }
                             
                             .onEnded({ _ in
                                 withAnimation(.spring()) {
-                                    sideBarOpened.toggle()
+                                    sideMenuOpened = false
                                 }
                             })
                     )
@@ -105,6 +106,7 @@ struct SelectionView: View {
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { _ in
                 model.saveUserData()
             })
+            
         }
         .ignoresSafeArea()
         
