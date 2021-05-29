@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct AnimeList: View {
-    @EnvironmentObject var model: AnimeModel
-    
     var animes: [Anime]
     
     // 2 grid items

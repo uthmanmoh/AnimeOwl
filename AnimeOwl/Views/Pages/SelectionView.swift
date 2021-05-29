@@ -11,9 +11,6 @@ struct SelectionView: View {
     @EnvironmentObject var model: AnimeModel
     @State private var sideMenuOpened = false
     
-    @State var currentView: SideMenuOptions = .home
-    
-    
     init() {
         UINavigationBar.appearance().barTintColor = UIColor.init(Color("button"))
     }
@@ -21,50 +18,45 @@ struct SelectionView: View {
     var body: some View {
         ZStack {
             if sideMenuOpened {
-                SideMenu(width: 300, sideMenuOpened: $sideMenuOpened, currentView: $currentView)
+                SideMenu(width: 300, sideMenuOpened: $sideMenuOpened)
             }
             
             NavigationView {
                 Group {
-                    if currentView == .home {
+                    switch model.currentView {
+                    case .home:
                         HomeView(sideMenuOpened: $sideMenuOpened)
-                    }
-                    else if currentView == .following {
+                    case .following:
                         FollowingView()
-                    }
-                    else if currentView == .calendar {
+                    case .calendar:
                         CalendarView()
-                    }
-                    else if currentView == .search {
+                    case .search:
                         SearchView()
-                    }
-                    else if currentView == .profile {
+                    case .profile:
                         ProfileView()
-                    }
-                    else if currentView == .settings {
+                    case .settings:
                         SettingsView()
-                    }
-                    else { // log out
-                        
+                    case .logOut:
+                        EmptyView()
                     }
                 }
-                .navigationBarTitle(currentView.title)
+                .navigationBarTitle(model.currentView.title)
                 .navigationBarItems(leading:
-                    Button(action: {
-                        withAnimation(.spring()){
-                            sideMenuOpened = true
-                        }
-                    }) {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(Color("button"))
-                                .frame(width: 45, height: 45)
-                                .shadow(color: .black.opacity(2) ,radius: 10)
-                                .blur(radius: 1)
-                            Text("🦉")
-                                .font(.system(size: 27))
-                        }
-                    }
+                                        Button(action: {
+                                            withAnimation(.spring()){
+                                                sideMenuOpened = true
+                                            }
+                                        }) {
+                                            ZStack {
+                                                Circle()
+                                                    .foregroundColor(Color("button"))
+                                                    .frame(width: 45, height: 45)
+                                                    .shadow(color: .black.opacity(2) ,radius: 10)
+                                                    .blur(radius: 1)
+                                                Text("🦉")
+                                                    .font(.system(size: 27))
+                                            }
+                                        }
                 )
             }
             .navigationViewStyle(StackNavigationViewStyle())

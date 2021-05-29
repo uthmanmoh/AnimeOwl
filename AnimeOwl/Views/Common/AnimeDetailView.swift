@@ -27,12 +27,13 @@ struct AnimeDetailView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 25.0))
                         .shadow(color: .black, radius: 20, y: 10)
                         .opacity(0.8)
+                        .padding(.top, -10)
                         .overlay(
                             // Anime Title
                             Text(anime.title)
                                 .font(Font.custom("Avenir Heavy", size: 30))
                                 .padding()
-                                .background(Color("button").opacity(0.9))
+                                .background(Color("button").blur(radius: 3.0).opacity(0.9).blendMode(.overlay))
                                 .cornerRadius(25.0)
                                 .shadow(color: .black, radius: 10)
                                 .padding(.bottom, 3)
@@ -43,11 +44,7 @@ struct AnimeDetailView: View {
                             Button(action: {
                                 model.isFollowingAnime.toggle()
                                 
-                                if model.isFollowingAnime {
-                                    model.followAnime(anime: anime)
-                                } else {
-                                    model.unfollowAnime(anime: anime)
-                                }
+                                model.updateFollowing(forAnime: anime)
                             }) {
                                 VStack {
                                     Image(systemName: model.isFollowingAnime ? "star.fill" : "star")
@@ -55,6 +52,7 @@ struct AnimeDetailView: View {
                                         .scaledToFit()
                                         .frame(width: 40, height: 40)
                                         .foregroundColor(Color(.systemYellow))
+                                        .colorMultiply(Color(.systemYellow))
                                     Text("Follow")
                                         .font(.caption)
                                         .padding(.top, -8)

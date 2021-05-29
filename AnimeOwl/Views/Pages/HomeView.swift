@@ -13,18 +13,12 @@ struct HomeView: View {
     @Binding var sideMenuOpened: Bool
     
     var body: some View {
-        if model.topAnimes != nil {
-            ZStack {
-                BackgroundColour()
-                AnimeList(animes: model.topAnimes!.top)
-            }
-            .navigationBarTitle("Top Anime") ////////////////////// TEMPORARY
-        } else {
-            ZStack {
-                BackgroundColour()
-                ProgressView()
-            }
+        ZStack {
+            BackgroundColour()
+            AnimeList(animes: model.topAnimes.top)
         }
+        .navigationBarTitle("Top Anime") ////////////////////// TEMPORARY
+        
     }
 }
 

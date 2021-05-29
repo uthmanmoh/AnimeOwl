@@ -11,7 +11,7 @@ import Firebase
 class AnimeModel: ObservableObject {
     
     // Anime info
-    @Published var topAnimes: TopAnimes?
+    @Published var topAnimes: TopAnimes = TopAnimes(top: [Anime]())
     @Published var followingAnimes: [Anime] = [Anime]()
     
     @Published var detailAnime: DetailAnime?
@@ -20,6 +20,9 @@ class AnimeModel: ObservableObject {
     // User info
     @Published var loggedIn = false
     @Published var user = User()
+    
+    // UI Info
+    @Published var currentView: SideMenuOptions = .home
     
     // MARK: - Anime Data Methods
     func getTopAnime() {
@@ -111,6 +114,10 @@ class AnimeModel: ObservableObject {
     func checkLogin() {
         loggedIn = Auth.auth().currentUser == nil ? false: true
         
+        DispatchQueue.main.async {
+            self.currentView = .home
+        }
+        
         if self.user.username == "" {
             getUserData()
         }
@@ -176,23 +183,16 @@ class AnimeModel: ObservableObject {
         
     }
     
-    func followAnime(anime: DetailAnime) {
+    func updateFollowing(forAnime anime: DetailAnime) {
         
         if !user.followingAnimes.contains(where: { eachAnime in
             eachAnime.id == anime.id
-        }) {
+        }) && isFollowingAnime {
             
             let toFollowAnimes = Anime(id: anime.id, url: anime.url, imageUrl: anime.imageUrl, title: anime.title, type: anime.type, score: anime.score, members: anime.members, rank: anime.rank, episodes: anime.episodes)
             user.followingAnimes.append(toFollowAnimes)
-        }
-        
-    }
-    
-    func unfollowAnime(anime: DetailAnime) {
-        
-        if user.followingAnimes.contains(where: { eachAnime in
-            eachAnime.id == anime.id
-        }) {
+        } else {
+            
             // Remove anime from user.followingAnimes
             for index in 0 ..< user.followingAnimes.count {
                 if user.followingAnimes[index].id == anime.id {
@@ -200,7 +200,6 @@ class AnimeModel: ObservableObject {
                     break
                 }
             }
-            
         }
         
     }

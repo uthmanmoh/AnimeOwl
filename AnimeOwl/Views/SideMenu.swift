@@ -14,8 +14,6 @@ struct SideMenu: View {
     let width: CGFloat
     @Binding var sideMenuOpened: Bool
     
-    @Binding var currentView: SideMenuOptions
-    
     @State private var logOutPressed = false
     
     var body: some View {
@@ -50,12 +48,12 @@ struct SideMenu: View {
                         .padding(.trailing)
                     
                     ForEach(SideMenuOptions.allCases.dropLast(), id: \.self) { option in
-                        SideMenuOptionView(option: option, isCurrent: currentView == option)
+                        SideMenuOptionView(option: option, isCurrent: model.currentView == option)
                             .onTapGesture {
                                 withAnimation(.spring()) {
                                     sideMenuOpened = false
                                 }
-                                    self.currentView = option
+                                model.currentView = option
                             }
                         
                         Divider()
