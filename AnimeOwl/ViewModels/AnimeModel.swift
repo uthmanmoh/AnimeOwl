@@ -92,6 +92,12 @@ class AnimeModel: ObservableObject {
         
     }
     
+    func resetDetailAnime() {
+        DispatchQueue.main.async {
+            self.detailAnime = nil
+        }
+    }
+    
     
     // MARK: - User Methods
     

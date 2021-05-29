@@ -20,7 +20,10 @@ struct HomeView: View {
             }
             .navigationBarTitle("Top Anime") ////////////////////// TEMPORARY
         } else {
-            ProgressView()
+            ZStack {
+                BackgroundColour()
+                ProgressView()
+            }
         }
     }
 }

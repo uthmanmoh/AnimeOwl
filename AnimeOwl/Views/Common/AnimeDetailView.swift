@@ -14,71 +14,159 @@ struct AnimeDetailView: View {
     
     var body: some View {
         if let anime = model.detailAnime {
-            ZStack {
+            
+            ZStack (alignment: .top) {
                 BackgroundColour()
-                    .opacity(0.15)
                 
+                let uiImage = UIImage(data: anime.imageData ?? Data())
                 VStack {
-                    HStack {
-                        Spacer()
-                        Text(anime.title)
-                            .font(Font.custom("Avenir Heavy", size: 35))
-                            .padding(.leading, 20)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            model.isFollowingAnime.toggle()
-                            
-                            if model.isFollowingAnime {
-                                model.followAnime(anime: anime)
-                            } else {
-                                model.unfollowAnime(anime: anime)
-                            }
-                        }) {
-                            VStack (spacing: 0) {
-                                Image(systemName: model.isFollowingAnime ? "star.fill" : "star")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 40, height: 40)
-                                    .foregroundColor(Color(.systemYellow))
+                    Image(uiImage: uiImage ?? UIImage())
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
+                        .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                        .shadow(color: .black, radius: 20, y: 10)
+                        .opacity(0.8)
+                        .overlay(
+                            // Anime Title
+                            Text(anime.title)
+                                .font(Font.custom("Avenir Heavy", size: 30))
+                                .padding()
+                                .background(Color("button").opacity(0.9))
+                                .cornerRadius(25.0)
+                                .shadow(color: .black, radius: 10)
+                                .padding(.bottom, 3)
+                                .padding(.horizontal, 30)
+                            , alignment: .bottom)
+                        .overlay(
+                            // Follow Button
+                            Button(action: {
+                                model.isFollowingAnime.toggle()
                                 
-                                Text("Follow")
-                                    .font(.caption)
+                                if model.isFollowingAnime {
+                                    model.followAnime(anime: anime)
+                                } else {
+                                    model.unfollowAnime(anime: anime)
+                                }
+                            }) {
+                                VStack {
+                                    Image(systemName: model.isFollowingAnime ? "star.fill" : "star")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 40, height: 40)
+                                        .foregroundColor(Color(.systemYellow))
+                                    Text("Follow")
+                                        .font(.caption)
+                                        .padding(.top, -8)
+                                        .foregroundColor(Color(.label))
+                                }
+                                .padding()
                             }
-                        }
-                        .padding(.trailing, 15)
-                        .padding(.bottom, -50)
-                    }
+                            , alignment: .topTrailing)
                     
-                    ScrollView {
-                        
-                        VStack (alignment: .leading, spacing: 10) {
-                            Text("This anime is rated #\(anime.rank) on MyAnimeList with \(anime.score, specifier: "%.2f") stars")
-                            Text("It has \(anime.episodes) episodes lasting \(anime.duration) long")
-                            Text("Status: \(anime.status)")
-                            Text("Rating: \(anime.rating)")
-                            
+                    
+                    
+                    VStack (alignment: .leading) {
+                        HStack {
+                            Text("Rated: ")
+                                .bold()
+                                .frame(maxWidth: 100, alignment: .leading)
+                                .multilineTextAlignment(.leading)
+                            Text("#\(anime.rank)")
                         }
-                        .padding(.top)
-                        .font(.system(size: 20, weight: .medium))
+                        .padding(5)
+                        
+                        HStack (alignment: .top) {
+                            Text("Episodes: ")
+                                .bold()
+                                .frame(maxWidth: 100, alignment: .leading)
+                                .multilineTextAlignment(.leading)
+                            Text("\(anime.episodes)")
+                        }
+                        .padding(5)
+                        
+                        HStack (alignment: .top) {
+                            Text("Description: ")
+                                .bold()
+                                .frame(maxWidth: 100, alignment: .leading)
+                                .multilineTextAlignment(.leading)
+                            Text(anime.synopsis)
+                                .lineLimit(4)
+                        }
+                        .padding(5)
                     }
-                    .frame(width: UIScreen.main.bounds.maxX-40, height: UIScreen.main.bounds.maxY-200)
+                    .padding(.top)
+                    
+                    Spacer()
                 }
-                .redacted(reason: isLoading ? .placeholder : [])
+                .ignoresSafeArea()
             }
-            .background(Image(uiImage: UIImage(data: anime.imageData ?? Data()) ?? UIImage())
-                            .resizable()
-                            .ignoresSafeArea()
-                            .scaledToFill()
-                            .opacity(0.3)
-                            .blur(radius: 2)
-                            .redacted(reason: isLoading ? .placeholder : []))
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
-                    self.isLoading = false
-                }
-            }
+            
+            //            ZStack {
+            //                BackgroundColour()
+            //                    .opacity(0.15)
+            //
+            //                VStack {
+            //                    HStack {
+            //                        Spacer()
+            //                        Text(anime.title)
+            //                            .font(Font.custom("Avenir Heavy", size: 35))
+            //                            .padding(.leading, 20)
+            //
+            //                        Spacer()
+            //
+            //                        Button(action: {
+            //                            model.isFollowingAnime.toggle()
+            //
+            //                            if model.isFollowingAnime {
+            //                                model.followAnime(anime: anime)
+            //                            } else {
+            //                                model.unfollowAnime(anime: anime)
+            //                            }
+            //                        }) {
+            //                            VStack (spacing: 0) {
+            //                                Image(systemName: model.isFollowingAnime ? "star.fill" : "star")
+            //                                    .resizable()
+            //                                    .scaledToFit()
+            //                                    .frame(width: 40, height: 40)
+            //                                    .foregroundColor(Color(.systemYellow))
+            //
+            //                                Text("Follow")
+            //                                    .font(.caption)
+            //                            }
+            //                        }
+            //                        .padding(.trailing, 15)
+            //                        .padding(.bottom, -50)
+            //                    }
+            //
+            //                    ScrollView {
+            //
+            //                        VStack (alignment: .leading, spacing: 10) {
+            //                            Text("This anime is rated #\(anime.rank) on MyAnimeList with \(anime.score, specifier: "%.2f") stars")
+            //                            Text("It has \(anime.episodes) episodes lasting \(anime.duration) long")
+            //                            Text("Status: \(anime.status)")
+            //                            Text("Rating: \(anime.rating)")
+            //
+            //                        }
+            //                        .padding(.top)
+            //                        .font(.system(size: 20, weight: .medium))
+            //                    }
+            //                    .frame(width: UIScreen.main.bounds.maxX-40, height: UIScreen.main.bounds.maxY-200)
+            //                }
+            //                .redacted(reason: isLoading ? .placeholder : [])
+            //            }
+            //            .background(Image(uiImage: UIImage(data: anime.imageData ?? Data()) ?? UIImage())
+            //                            .resizable()
+            //                            .ignoresSafeArea()
+            //                            .scaledToFill()
+            //                            .opacity(0.3)
+            //                            .blur(radius: 2)
+            //                            .redacted(reason: isLoading ? .placeholder : []))
+            //            .onAppear {
+            //                DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
+            //                    self.isLoading = false
+            //                }
+            //            }
         }
         else {
             ZStack {
