@@ -15,7 +15,11 @@ class AnimeModel: ObservableObject {
     @Published var followingAnimes: [Anime] = [Anime]()
     
     @Published var detailAnime: DetailAnime?
+    
     @Published var isFollowingAnime = false
+    
+    @Published var weeklyAnime: WeeklyAnime?
+    @Published var currentDay: DaysOfWeek = .monday
     
     // User info
     @Published var loggedIn = false
@@ -94,6 +98,44 @@ class AnimeModel: ObservableObject {
         task.resume()
         
     }
+    
+    func getWeekdayAnime(forDay day: String) {
+        
+        let url = URL(string: "\(Constants.API_URL)/schedule/\(day.lowercased())")!
+        
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error == nil, let data = data {
+                
+                do {
+                    let result = try JSONDecoder().decode(WeeklyAnime.self, from: data)
+                    
+                    for anime in result.getCurrentDay(forDay: day)! {
+                        anime.getImageData()
+                        anime.getAirDate()
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.weeklyAnime = result
+                    }
+                    
+                    
+                } catch {
+                    print(error.localizedDescription)
+                    print(error as Any)
+                }
+                
+            } else {
+                print(error?.localizedDescription ?? "Unknown Error")
+            }
+        }
+        
+        task.resume()
+        
+    }
+
     
     func resetDetailAnime() {
         DispatchQueue.main.async {

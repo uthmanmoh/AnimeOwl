@@ -23,18 +23,6 @@ struct AnimeCard: View {
     var body: some View {
         VStack {
             let uiImage = UIImage(data: anime.imageData ?? Data())
-            //            NavigationLink(destination: AnimeDetailView()
-            //                            .onAppear {
-            //                                model.getDetailAnime(id: anime.id)
-            //                            }) {
-            //                Image(uiImage: uiImage ?? UIImage())
-            //                    .resizable()
-            //                    .aspectRatio(0.6466, contentMode: .fit)
-            //                    .frame(height: 180)
-            //                    .clipShape(RoundedRectangle(cornerRadius: 22))
-            //                    .shadow(color: Color(.secondaryLabel), radius: 15, x: 5, y: 5)
-            //            }
-            
             Image(uiImage: uiImage ?? UIImage())
                 .resizable()
                 .aspectRatio(0.6466, contentMode: .fit)

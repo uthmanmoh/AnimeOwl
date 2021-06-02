@@ -50,8 +50,6 @@ class Anime: Decodable, Identifiable, ObservableObject {
     var url: String
     var imageUrl: String?
     var title: String
-    //var airing: Bool
-    //var synopsis: String
     var type: String
     var score: Double
     var startDate: String?
