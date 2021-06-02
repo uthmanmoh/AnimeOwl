@@ -42,21 +42,23 @@ struct SelectionView: View {
                 }
                 .navigationBarTitle(model.currentView.title)
                 .navigationBarItems(leading:
-                                        Button(action: {
-                                            withAnimation(.spring()){
-                                                sideMenuOpened = true
-                                            }
-                                        }) {
-                                            ZStack {
-                                                Circle()
-                                                    .foregroundColor(Color("button"))
-                                                    .frame(width: 45, height: 45)
-                                                    .shadow(color: .black.opacity(2) ,radius: 10)
-                                                    .blur(radius: 1)
-                                                Text("🦉")
-                                                    .font(.system(size: 27))
-                                            }
-                                        }
+                                        
+                    // Side Menu Logo
+                    Button(action: {
+                        withAnimation(.spring()){
+                            sideMenuOpened = true
+                        }
+                    }) {
+                        ZStack {
+                            Circle()
+                                .foregroundColor(Color("button"))
+                                .frame(width: 45, height: 45)
+                                .shadow(color: .black.opacity(2) ,radius: 10)
+                                .blur(radius: 1)
+                            Text("🦉")
+                                .font(.system(size: 27))
+                        }
+                    }
                 )
             }
             .navigationViewStyle(StackNavigationViewStyle())
@@ -75,22 +77,6 @@ struct SelectionView: View {
                             sideMenuOpened = false
                         }
                     }
-                    .gesture(
-                        DragGesture()
-                            .onChanged{ value in
-                                if value.translation != CGSize.zero {
-                                    withAnimation(.spring()) {
-                                        sideMenuOpened = false
-                                    }
-                                }
-                            }
-                            
-                            .onEnded({ _ in
-                                withAnimation(.spring()) {
-                                    sideMenuOpened = false
-                                }
-                            })
-                    )
             )
             .onAppear {
                 model.getTopAnime()

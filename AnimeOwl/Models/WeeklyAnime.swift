@@ -9,13 +9,13 @@ import Foundation
 
 class WeeklyAnime: Decodable {
     
-    var monday: [DayAnime]?
-    var tuesday: [DayAnime]?
-    var wednesday: [DayAnime]?
-    var thursday: [DayAnime]?
-    var friday: [DayAnime]?
-    var saturday: [DayAnime]?
-    var sunday: [DayAnime]?
+    var monday: [DayAnime]
+    var tuesday: [DayAnime]
+    var wednesday: [DayAnime]
+    var thursday: [DayAnime]
+    var friday: [DayAnime]
+    var saturday: [DayAnime]
+    var sunday: [DayAnime]
     
     func getCurrentDay(forDay day: String) -> [DayAnime]? {
         if day.lowercased() == "monday" {
@@ -40,6 +40,7 @@ class WeeklyAnime: Decodable {
 class DayAnime: Decodable, ObservableObject, Identifiable {
     
     @Published var imageData: Data?
+    @Published var day: String?
     @Published var airDate: String?
     
     var id: Int
@@ -105,11 +106,12 @@ class DayAnime: Decodable, ObservableObject, Identifiable {
             
             let time = formatter.string(from: date)
             
-            let weekday = formatter.shortWeekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
+            let weekday = formatter.weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
             
-            let dayAndTime = weekday + " " + time
+            let dayAndTime = weekday.prefix(3) + " " + time
             
             DispatchQueue.main.async {
+                self.day = weekday
                 self.airDate = dayAndTime
             }
         } else {
