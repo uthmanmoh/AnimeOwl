@@ -30,13 +30,13 @@ struct CalendarView: View {
                 .ignoresSafeArea()
             VStack {
                 Picker(selection: $pickerSelectedDay, label:
-                        Text("Day of Week: \(pickerSelectedDay)")
-                        .font(Font.custom("Avenir Heavy", size: 16))
+                        Text(pickerSelectedDay)
+                        .font(Font.custom("Avenir Heavy", size: 18))
                         .foregroundColor(Color(.label))
-                        .padding()
+                        .padding(10)
                         .background(Color(#colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)))
                         .cornerRadius(25.0)
-                        .shadow(radius: 7)
+                        .shadow(color: .black.opacity(0.8), radius: 15, x: -5, y: 5)
                 ) {
                     // Picker Items
                     ForEach(DaysOfWeek.allCases, id: \.self) { day in
@@ -45,7 +45,6 @@ struct CalendarView: View {
                     }
                 }
                 .pickerStyle(MenuPickerStyle())
-                .padding()
                 
                 TabView(selection: $tabSelection) {
                     ZStack {
@@ -53,7 +52,9 @@ struct CalendarView: View {
                         ScrollView(showsIndicators: false) {
                             if let animes = model.weeklyAnime?.getCurrentDay(forDay: pickerSelectedDay) {
                                 LazyVGrid (columns: gridItems) {
-                                    ForEach(animes) { anime in
+                                    ForEach(animes.sorted(by: { first, second in
+                                        first.score ?? 0 > second.score ?? 0
+                                    })) { anime in
                                         CalendarAnimeCard(anime: anime)
                                     }
                                 }

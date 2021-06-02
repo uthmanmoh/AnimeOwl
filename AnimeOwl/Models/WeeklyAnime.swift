@@ -40,7 +40,7 @@ class WeeklyAnime: Decodable {
 class DayAnime: Decodable, ObservableObject, Identifiable {
     
     @Published var imageData: Data?
-    @Published var airDate: Date?
+    @Published var airDate: String?
     
     var id: Int
     var url: String?
@@ -100,9 +100,17 @@ class DayAnime: Decodable, ObservableObject, Identifiable {
         guard airingStart != nil else { return }
         
         if let date = ISO8601DateFormatter().date(from: self.airingStart!) {
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            
+            let time = formatter.string(from: date)
+            
+            let weekday = formatter.shortWeekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
+            
+            let dayAndTime = weekday + " " + time
+            
             DispatchQueue.main.async {
-                self.airDate = date
-                print(self.airDate as Any)
+                self.airDate = dayAndTime
             }
         } else {
             print("Failed to set date for \(title ?? "Some anime")")

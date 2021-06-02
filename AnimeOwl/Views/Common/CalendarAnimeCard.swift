@@ -28,10 +28,12 @@ struct CalendarAnimeCard: View {
             
             Text(anime.title ?? "")
                 .bold()
-            Text("\(anime.score ?? 0, specifier: "%.2f")")
-            Text(anime.airingStart ?? "")
+            Text("\(anime.score ?? 0, specifier: "%.2f") ⭐️")
+            if let date = anime.airDate {
+                Text(date)
+            }
         }
-        .frame(height: 250)
+        .frame(height: 265)
         .padding(.horizontal, 3)
     }
 }

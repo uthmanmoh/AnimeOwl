@@ -19,7 +19,6 @@ class AnimeModel: ObservableObject {
     @Published var isFollowingAnime = false
     
     @Published var weeklyAnime: WeeklyAnime?
-    @Published var currentDay: DaysOfWeek = .monday
     
     // User info
     @Published var loggedIn = false
