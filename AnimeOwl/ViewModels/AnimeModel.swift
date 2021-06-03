@@ -125,6 +125,7 @@ class AnimeModel: ObservableObject {
 //                        print("BEFORE FIXINGF WEEKLY ANIME: \(self.weeklyAnime!.monday.count + self.weeklyAnime!.tuesday.count + self.weeklyAnime!.wednesday.count + self.weeklyAnime!.thursday.count + self.weeklyAnime!.friday.count + self.weeklyAnime!.saturday.count + self.weeklyAnime!.sunday.count)")
                         self.fixWeeklyAnimes()
 //                        print("AFTERRR FIXINGF WEEKLY ANIME: \(self.weeklyAnime!.monday.count + self.weeklyAnime!.tuesday.count + self.weeklyAnime!.wednesday.count + self.weeklyAnime!.thursday.count + self.weeklyAnime!.friday.count + self.weeklyAnime!.saturday.count + self.weeklyAnime!.sunday.count)")
+                        self.setUpcomingAnimes()
                     }
                     
                 } catch {
@@ -317,7 +318,7 @@ class AnimeModel: ObservableObject {
         loggedIn = Auth.auth().currentUser == nil ? false: true
         
         DispatchQueue.main.async {
-            self.currentView = .calendar
+            self.currentView = .home
         }
         
         if self.user.username == "" {
@@ -373,12 +374,17 @@ class AnimeModel: ObservableObject {
             var animesArray = [[String: Any]]()
             for anime in user.followingAnimes {
                 animesArray.append(["id": anime.id, "url": anime.url, "imageUrl": anime.imageUrl as Any, "title": anime.title, "type": anime.type, "score": anime.score, "startDate": anime.startDate as Any, "endDate": anime.endDate as Any, "members": anime.members, "rank": anime.rank, "episodes": anime.episodes])
-                
             }
             
-            reference.setData(["followingAnimes": animesArray, "username": user.username]) { error in
+            reference.updateData(["followingAnimes": FieldValue.delete()]) { error in
                 if error != nil {
-                    print(error?.localizedDescription ?? "Error setting data in AnimeModel.saveUserData()")
+                    print(error.debugDescription)
+                }
+            }
+            
+            reference.updateData(["followingAnimes": animesArray]) { error in
+                if error != nil {
+                    print(error.debugDescription)
                 }
             }
         }

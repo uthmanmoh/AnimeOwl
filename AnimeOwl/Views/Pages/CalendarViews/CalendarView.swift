@@ -51,6 +51,7 @@ struct CalendarView: View {
                         CalendarListView(animes: animes)
                     } else {
                         ProgressView()
+                        Spacer()
                     }
                 }
                 
@@ -85,7 +86,6 @@ struct CalendarView: View {
         .accentColor(Color(#colorLiteral(red: 0.2656752765, green: 0.07812381536, blue: 0.06099386513, alpha: 1)))
         .onAppear {
             model.getWeekdayAnime()
-            model.setUpcomingAnimes()
         }
         
     }
