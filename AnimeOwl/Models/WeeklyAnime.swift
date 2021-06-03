@@ -40,6 +40,7 @@ class WeeklyAnime: Decodable {
 class DayAnime: Decodable, ObservableObject, Identifiable {
     
     @Published var imageData: Data?
+    @Published var date: Date?
     @Published var day: String?
     @Published var airTime: String?
     
@@ -109,6 +110,7 @@ class DayAnime: Decodable, ObservableObject, Identifiable {
             let weekday = formatter.weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
             
             DispatchQueue.main.async {
+                self.date = date
                 self.day = weekday
                 self.airTime = time
             }

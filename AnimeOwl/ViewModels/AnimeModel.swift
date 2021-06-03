@@ -20,6 +20,8 @@ class AnimeModel: ObservableObject {
     
     @Published var weeklyAnime: WeeklyAnime?
     
+    @Published var upcomingAnimes = [DayAnime]()
+    
     // User info
     @Published var loggedIn = false
     @Published var user = User()
@@ -261,6 +263,12 @@ class AnimeModel: ObservableObject {
         }
     }
     
+    func setUpcomingAnimes() {
+        
+        // LINKED LIST
+        
+    }
+    
     
     // MARK: - User Methods
     
@@ -275,7 +283,7 @@ class AnimeModel: ObservableObject {
         loggedIn = Auth.auth().currentUser == nil ? false: true
         
         DispatchQueue.main.async {
-            self.currentView = .home
+            self.currentView = .calendar
         }
         
         if self.user.username == "" {

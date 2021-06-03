@@ -22,6 +22,8 @@ struct CalendarView: View {
     init() {
         UITabBar.appearance().barTintColor = UIColor.init(Color("button"))
         UITabBar.appearance().unselectedItemTintColor = .systemGray
+        
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color(.brown))
     }
     
     var body: some View {
@@ -29,7 +31,27 @@ struct CalendarView: View {
             
             ZStack {
                 BackgroundColour()
-                ZStack {
+                
+                VStack {
+                    
+                    Picker(selection: $pickerSelectedDay, label:
+                            Text(pickerSelectedDay)
+                            .font(Font.custom("Avenir Heavy", size: 18))
+                            .foregroundColor(Color(.label))
+                            .padding(10)
+                            .background(Color("button"))
+                    ) {
+                        // Picker Items
+                        ForEach(DaysOfWeek.allCases, id: \.self) { day in
+                            Text(day.shortForm)
+                                .tag(day.title)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke())
+                    .padding([.top, .horizontal])
                     
                     ScrollView(showsIndicators: false) {
                         if let animes = model.weeklyAnime?.getCurrentDay(forDay: pickerSelectedDay) {
@@ -45,26 +67,6 @@ struct CalendarView: View {
                             ProgressView()
                         }
                     }
-                    
-                    Picker(selection: $pickerSelectedDay, label:
-                            Text(pickerSelectedDay)
-                            .font(Font.custom("Avenir Heavy", size: 18))
-                            .foregroundColor(Color(.label))
-                            .padding(10)
-                            .background(Color("button"))
-                            .cornerRadius(20.0, antialiased: true)
-                            .shadow(color: .black, radius: 20, y: 5)
-                            .shadow(color: .black, radius: 20, y: 5)
-                    ) {
-                        // Picker Items
-                        ForEach(DaysOfWeek.allCases, id: \.self) { day in
-                            Text(day.title)
-                                .tag(day.title)
-                        }
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                    .offset(y: -15)
-                    .frame(maxHeight: .infinity, alignment: .top)
                 }
                 
             }
@@ -92,29 +94,10 @@ struct CalendarView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .accentColor(Color(#colorLiteral(red: 0.2656752765, green: 0.07812381536, blue: 0.06099386513, alpha: 1)))
-        //            .overlay(Picker(selection: $pickerSelectedDay, label:
-        //                                Text(pickerSelectedDay)
-        //                                .font(Font.custom("Avenir Heavy", size: 18))
-        //                                .foregroundColor(Color(.label))
-        //                                .padding(10)
-        //                                .background(Color(#colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)))
-        //                                .cornerRadius(25.0)
-        //                                .shadow(color: .black.opacity(0.8), radius: 15, x: -5, y: 5)
-        //            ) {
-        //                // Picker Items
-        //                ForEach(DaysOfWeek.allCases, id: \.self) { day in
-        //                    Text(day.title)
-        //                        .tag(day.title)
-        //                }
-        //            }
-        //            .pickerStyle(MenuPickerStyle()), alignment: .topTrailing)
         
         .onAppear {
             model.getWeekdayAnime()
         }
-//        .onChange(of: pickerSelectedDay, perform: { _ in
-//            model.getWeekdayAnime(forDay: pickerSelectedDay)
-//        })
         
     }
 }

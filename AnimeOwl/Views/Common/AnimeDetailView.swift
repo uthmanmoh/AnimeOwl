@@ -76,7 +76,7 @@ struct AnimeDetailView: View {
                         // Follow Button
                         ZStack {
                             Circle()
-                                .foregroundColor(.black)
+                                .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                                 .frame(width: 80, height: 80)
                                 .shadow(color: Color(.label), radius: model.isFollowingAnime ? 0 : 10)
                                 .animation(.default)
