@@ -23,6 +23,7 @@
 		008B124B265CC53200E7193A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B124A265CC53200E7193A /* SettingsView.swift */; };
 		008B124E265CCA7700E7193A /* AnimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B124D265CCA7700E7193A /* AnimeList.swift */; };
 		0099E6402667345100460A26 /* CalendarAnimeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099E63F2667345100460A26 /* CalendarAnimeCard.swift */; };
+		0099E6432668A25600460A26 /* CalendarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099E6422668A25600460A26 /* CalendarListView.swift */; };
 		00AAC63426537B7700BD57EA /* AnimeOwlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */; };
 		00AAC63826537B7900BD57EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63726537B7900BD57EA /* Assets.xcassets */; };
 		00AAC63B26537B7900BD57EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00AAC63A26537B7900BD57EA /* Preview Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		008B124A265CC53200E7193A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		008B124D265CCA7700E7193A /* AnimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeList.swift; sourceTree = "<group>"; };
 		0099E63F2667345100460A26 /* CalendarAnimeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAnimeCard.swift; sourceTree = "<group>"; };
+		0099E6422668A25600460A26 /* CalendarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarListView.swift; sourceTree = "<group>"; };
 		00AAC63026537B7700BD57EA /* AnimeOwl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimeOwl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AAC63326537B7700BD57EA /* AnimeOwlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeOwlApp.swift; sourceTree = "<group>"; };
 		00AAC63726537B7900BD57EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,15 +101,25 @@
 		008B124C265CC56400E7193A /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				0099E6412668A23100460A26 /* CalendarViews */,
 				00CDFF2F26573100000E88C8 /* SelectionView.swift */,
 				008B1242265CC20100E7193A /* HomeView.swift */,
 				008B1240265CC06200E7193A /* FollowingView.swift */,
 				008B1244265CC49F00E7193A /* SearchView.swift */,
 				008B1246265CC4F500E7193A /* ProfileView.swift */,
-				008B1248265CC51600E7193A /* CalendarView.swift */,
 				008B124A265CC53200E7193A /* SettingsView.swift */,
 			);
 			path = Pages;
+			sourceTree = "<group>";
+		};
+		0099E6412668A23100460A26 /* CalendarViews */ = {
+			isa = PBXGroup;
+			children = (
+				008B1248265CC51600E7193A /* CalendarView.swift */,
+				0099E63F2667345100460A26 /* CalendarAnimeCard.swift */,
+				0099E6422668A25600460A26 /* CalendarListView.swift */,
+			);
+			path = CalendarViews;
 			sourceTree = "<group>";
 		};
 		00AAC62726537B7700BD57EA = {
@@ -211,7 +223,6 @@
 				008B124D265CCA7700E7193A /* AnimeList.swift */,
 				00CDFF2B26562973000E88C8 /* AnimeCard.swift */,
 				00CDFF352658C38E000E88C8 /* AnimeDetailView.swift */,
-				0099E63F2667345100460A26 /* CalendarAnimeCard.swift */,
 				00AAC65F2653A1CA00BD57EA /* OwlLogo.swift */,
 				00AAC6612653A79E00BD57EA /* HomeButton.swift */,
 				00CDFF2D2657034A000E88C8 /* BackgroundColour.swift */,
@@ -363,6 +374,7 @@
 				00AAC65C26538B1F00BD57EA /* LoginForm.swift in Sources */,
 				00AAC64426537BA300BD57EA /* TopAnimes.swift in Sources */,
 				00CDFF2E2657034A000E88C8 /* BackgroundColour.swift in Sources */,
+				0099E6432668A25600460A26 /* CalendarListView.swift in Sources */,
 				00AAC65E26538F7F00BD57EA /* CreateAccountForm.swift in Sources */,
 				008B124E265CCA7700E7193A /* AnimeList.swift in Sources */,
 				00CDFF322658B250000E88C8 /* SideMenu.swift in Sources */,

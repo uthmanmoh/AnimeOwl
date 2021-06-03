@@ -20,7 +20,7 @@ class AnimeModel: ObservableObject {
     
     @Published var weeklyAnime: WeeklyAnime?
     
-    @Published var upcomingAnimes = [DayAnime]()
+    @Published var upcomingAnimes: [DayAnime]?
     
     // User info
     @Published var loggedIn = false
@@ -156,6 +156,8 @@ class AnimeModel: ObservableObject {
             }
         }
         
+        weeklyAnime!.monday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
+        
         for anime in self.weeklyAnime!.tuesday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "tuesday" {
@@ -168,6 +170,8 @@ class AnimeModel: ObservableObject {
                 }
             }
         }
+        
+        weeklyAnime!.tuesday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
         
         for anime in self.weeklyAnime!.wednesday {
             if let curDay = anime.day?.lowercased() {
@@ -182,6 +186,8 @@ class AnimeModel: ObservableObject {
             }
         }
         
+        weeklyAnime!.wednesday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
+        
         for anime in self.weeklyAnime!.thursday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "thursday" {
@@ -194,6 +200,8 @@ class AnimeModel: ObservableObject {
                 }
             }
         }
+        
+        weeklyAnime!.thursday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
         
         for anime in self.weeklyAnime!.friday {
             if let curDay = anime.day?.lowercased() {
@@ -208,6 +216,8 @@ class AnimeModel: ObservableObject {
             }
         }
         
+        weeklyAnime!.friday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
+        
         for anime in self.weeklyAnime!.saturday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "saturday" {
@@ -220,6 +230,8 @@ class AnimeModel: ObservableObject {
                 }
             }
         }
+        
+        weeklyAnime!.saturday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
         
         for anime in self.weeklyAnime!.sunday {
             if let curDay = anime.day?.lowercased() {
@@ -234,6 +246,8 @@ class AnimeModel: ObservableObject {
             }
             
         }
+        
+        weeklyAnime!.sunday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
         
     }
     
@@ -265,7 +279,27 @@ class AnimeModel: ObservableObject {
     
     func setUpcomingAnimes() {
         
-        // LINKED LIST
+        guard self.weeklyAnime != nil else { return }
+        
+        self.upcomingAnimes = [DayAnime]()
+        var count = 0
+        outerloop: for eachDay in DaysOfWeek.allCases {
+            for anime in self.weeklyAnime!.getCurrentDay(forDay: eachDay.title) {
+                self.upcomingAnimes?.append(anime)
+                count += 1
+                if count > 10 { break outerloop }
+            }
+        }
+        
+        self.upcomingAnimes!.sort { first, second in
+            // Fix this sorting algorithm
+            let now = Date()
+            if let firstDate = first.date, let secondDate = second.date {
+                return firstDate.distance(to: now) < secondDate.distance(to: now)
+            } else {
+                return false
+            }
+        }
         
     }
     

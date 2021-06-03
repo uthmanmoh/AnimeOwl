@@ -112,7 +112,7 @@ class DayAnime: Decodable, ObservableObject, Identifiable {
             DispatchQueue.main.async {
                 self.date = date
                 self.day = weekday
-                self.airTime = time
+                self.airTime = weekday + " " + time
             }
         } else {
             print("Failed to set date for \(title ?? "Some anime")")

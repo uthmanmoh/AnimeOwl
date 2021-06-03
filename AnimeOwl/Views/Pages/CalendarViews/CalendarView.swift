@@ -17,8 +17,6 @@ struct CalendarView: View {
     
     @State private var tabSelection = 1
     
-    private let gridItems = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
     init() {
         UITabBar.appearance().barTintColor = UIColor.init(Color("button"))
         UITabBar.appearance().unselectedItemTintColor = .systemGray
@@ -33,14 +31,7 @@ struct CalendarView: View {
                 BackgroundColour()
                 
                 VStack {
-                    
-                    Picker(selection: $pickerSelectedDay, label:
-                            Text(pickerSelectedDay)
-                            .font(Font.custom("Avenir Heavy", size: 18))
-                            .foregroundColor(Color(.label))
-                            .padding(10)
-                            .background(Color("button"))
-                    ) {
+                    Picker("", selection: $pickerSelectedDay) {
                         // Picker Items
                         ForEach(DaysOfWeek.allCases, id: \.self) { day in
                             Text(day.shortForm)
@@ -49,23 +40,17 @@ struct CalendarView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .overlay(
+                        // border around picker
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke())
+                            .stroke()
+                    )
                     .padding([.top, .horizontal])
                     
-                    ScrollView(showsIndicators: false) {
-                        if let animes = model.weeklyAnime?.getCurrentDay(forDay: pickerSelectedDay) {
-                            LazyVGrid (columns: gridItems) {
-                                ForEach(animes.sorted(by: { first, second in
-                                    first.score ?? 0 > second.score ?? 0
-                                })) { anime in
-                                    CalendarAnimeCard(anime: anime)
-                                }
-                            }
-                            .padding(.horizontal)
-                        } else {
-                            ProgressView()
-                        }
+                    
+                    if let animes = model.weeklyAnime?.getCurrentDay(forDay: pickerSelectedDay) {
+                        CalendarListView(animes: animes)
+                    } else {
+                        ProgressView()
                     }
                 }
                 
@@ -82,7 +67,11 @@ struct CalendarView: View {
             
             ZStack {
                 BackgroundColour()
-                Text("Following")
+                if let animes = model.upcomingAnimes {
+                    CalendarListView(animes: animes)
+                } else {
+                    ProgressView()
+                }
             }
             .tabItem {
                 VStack {
@@ -94,9 +83,9 @@ struct CalendarView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .accentColor(Color(#colorLiteral(red: 0.2656752765, green: 0.07812381536, blue: 0.06099386513, alpha: 1)))
-        
         .onAppear {
             model.getWeekdayAnime()
+            model.setUpcomingAnimes()
         }
         
     }
