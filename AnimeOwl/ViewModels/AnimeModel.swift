@@ -111,19 +111,19 @@ class AnimeModel: ObservableObject {
                 do {
                     let result = try JSONDecoder().decode(WeeklyAnime.self, from: data)
                     
-                    for eachDay in Constants.daysOfTheWeek {
-                        for anime in result.getCurrentDay(forDay: eachDay)! {
+                    for eachDay in DaysOfWeek.allCases {
+                        for anime in result.getCurrentDay(forDay: eachDay.title) {
                             anime.getImageData()
                             anime.getAirDate()
                         }
                     }
                     
-                    
                     DispatchQueue.main.async {
-                        self.fixWeeklyAnimes(weeklyAnime: result)
                         self.weeklyAnime = result
+//                        print("BEFORE FIXINGF WEEKLY ANIME: \(self.weeklyAnime!.monday.count + self.weeklyAnime!.tuesday.count + self.weeklyAnime!.wednesday.count + self.weeklyAnime!.thursday.count + self.weeklyAnime!.friday.count + self.weeklyAnime!.saturday.count + self.weeklyAnime!.sunday.count)")
+                        self.fixWeeklyAnimes()
+//                        print("AFTERRR FIXINGF WEEKLY ANIME: \(self.weeklyAnime!.monday.count + self.weeklyAnime!.tuesday.count + self.weeklyAnime!.wednesday.count + self.weeklyAnime!.thursday.count + self.weeklyAnime!.friday.count + self.weeklyAnime!.saturday.count + self.weeklyAnime!.sunday.count)")
                     }
-                    
                     
                 } catch {
                     print(error.localizedDescription)
@@ -139,150 +139,94 @@ class AnimeModel: ObservableObject {
         
     }
     
-    func fixWeeklyAnimes(weeklyAnime arr: WeeklyAnime) {
+    func fixWeeklyAnimes() {
         
-        for anime in arr.monday {
+        for anime in self.weeklyAnime!.monday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "monday" {
                     
-                    let index = arr.monday.firstIndex(where: {$0 === anime})
-                    arr.monday.remove(at: index!)
+                    let index = self.weeklyAnime!.monday.firstIndex(where: {$0 === anime})
+                    self.weeklyAnime!.monday.remove(at: index!)
                     
-                    if curDay == "sunday" {
-                        arr.sunday.append(anime)
-                    } else if curDay == "tuesday" {
-                        arr.tuesday.append(anime)
-                    } else if curDay == "wednesday" {
-                        arr.wednesday.append(anime)
-                    } else {
-                        arr.saturday.append(anime)
-                    }
+                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
                     
                 }
             }
         }
         
-        for anime in arr.tuesday {
+        for anime in self.weeklyAnime!.tuesday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "tuesday" {
                     
-                    let index = arr.tuesday.firstIndex(where: {$0 === anime})
-                    arr.tuesday.remove(at: index!)
+                    let index = self.weeklyAnime!.tuesday.firstIndex(where: {$0 === anime})
+                    self.weeklyAnime!.tuesday.remove(at: index!)
                     
-                    if curDay == "monday" {
-                        arr.monday.append(anime)
-                    } else if curDay == "wednesday" {
-                        arr.wednesday.append(anime)
-                    } else if curDay == "thursday" {
-                        arr.thursday.append(anime)
-                    } else {
-                        arr.sunday.append(anime)
-                    }
+                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
                     
                 }
             }
         }
         
-        for anime in arr.wednesday {
+        for anime in self.weeklyAnime!.wednesday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "wednesday" {
                     
-                    let index = arr.wednesday.firstIndex(where: {$0 === anime})
-                    arr.wednesday.remove(at: index!)
+                    let index = self.weeklyAnime!.wednesday.firstIndex(where: {$0 === anime})
+                    self.weeklyAnime!.wednesday.remove(at: index!)
                     
-                    if curDay == "tuesday" {
-                        arr.tuesday.append(anime)
-                    } else if curDay == "thursday" {
-                        arr.thursday.append(anime)
-                    } else if curDay == "friday" {
-                        arr.friday.append(anime)
-                    } else {
-                        arr.monday.append(anime)
-                    }
+                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
                     
                 }
             }
         }
         
-        for anime in arr.thursday {
+        for anime in self.weeklyAnime!.thursday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "thursday" {
                     
-                    let index = arr.thursday.firstIndex(where: {$0 === anime})
-                    arr.thursday.remove(at: index!)
+                    let index = self.weeklyAnime!.thursday.firstIndex(where: {$0 === anime})
+                    self.weeklyAnime!.thursday.remove(at: index!)
                     
-                    if curDay == "wednesday" {
-                        arr.wednesday.append(anime)
-                    } else if curDay == "friday" {
-                        arr.friday.append(anime)
-                    } else if curDay == "saturday" {
-                        arr.saturday.append(anime)
-                    } else {
-                        arr.tuesday.append(anime)
-                    }
+                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
                     
                 }
             }
         }
         
-        for anime in arr.friday {
+        for anime in self.weeklyAnime!.friday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "friday" {
                     
-                    let index = arr.friday.firstIndex(where: {$0 === anime})
-                    arr.friday.remove(at: index!)
+                    let index = self.weeklyAnime!.friday.firstIndex(where: {$0 === anime})
+                    self.weeklyAnime!.friday.remove(at: index!)
                     
-                    if curDay == "thursday" {
-                        arr.thursday.append(anime)
-                    } else if curDay == "saturday" {
-                        arr.saturday.append(anime)
-                    } else if curDay == "sunday" {
-                        arr.sunday.append(anime)
-                    } else {
-                        arr.wednesday.append(anime)
-                    }
+                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
                     
                 }
             }
         }
         
-        for anime in arr.saturday {
+        for anime in self.weeklyAnime!.saturday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "saturday" {
                     
-                    let index = arr.saturday.firstIndex(where: {$0 === anime})
-                    arr.saturday.remove(at: index!)
+                    let index = self.weeklyAnime!.saturday.firstIndex(where: {$0 === anime})
+                    self.weeklyAnime!.saturday.remove(at: index!)
                     
-                    if curDay == "sunday" {
-                        arr.sunday.append(anime)
-                    } else if curDay == "friday" {
-                        arr.friday.append(anime)
-                    } else if curDay == "monday" {
-                        arr.monday.append(anime)
-                    } else {
-                        arr.thursday.append(anime)
-                    }
+                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
                     
                 }
             }
         }
         
-        for anime in arr.sunday {
+        for anime in self.weeklyAnime!.sunday {
             if let curDay = anime.day?.lowercased() {
                 if curDay != "sunday" {
                     
-                    let index = arr.sunday.firstIndex(where: {$0 === anime})
-                    arr.sunday.remove(at: index!)
+                    let index = self.weeklyAnime!.sunday.firstIndex(where: {$0 === anime})
+                    self.weeklyAnime!.sunday.remove(at: index!)
                     
-                    if curDay == "monday" {
-                        arr.monday.append(anime)
-                    } else if curDay == "tuesday" {
-                        arr.tuesday.append(anime)
-                    } else if curDay == "friday" {
-                        arr.friday.append(anime)
-                    } else {
-                        arr.saturday.append(anime)
-                    }
+                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
                     
                 }
             }
@@ -291,6 +235,25 @@ class AnimeModel: ObservableObject {
         
     }
     
+    func addToCorrectArray(arr: WeeklyAnime, anime: DayAnime, curDay: String) {
+        
+        if curDay == "monday" {
+            arr.monday.append(anime)
+        } else if curDay == "tuesday" {
+            arr.tuesday.append(anime)
+        } else if curDay == "wednesday" {
+            arr.wednesday.append(anime)
+        } else if curDay == "thursday" {
+            arr.thursday.append(anime)
+        } else if curDay == "friday" {
+            arr.friday.append(anime)
+        } else if curDay == "saturday" {
+            arr.saturday.append(anime)
+        } else if curDay == "sunday" {
+            arr.sunday.append(anime)
+        }
+        
+    }
     
     func resetDetailAnime() {
         DispatchQueue.main.async {

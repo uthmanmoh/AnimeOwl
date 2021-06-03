@@ -43,7 +43,7 @@ struct AnimeCard: View {
             
             Text(anime.title)
                 .bold()
-            Text("\(anime.score, specifier: "%.2f")")
+            Text("\(anime.score, specifier: "%.2f") ⭐️")
         }
         .frame(height: 250)
     }

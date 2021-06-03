@@ -29,7 +29,7 @@ struct CalendarAnimeCard: View {
             Text(anime.title ?? "")
                 .bold()
             Text("\(anime.score ?? 0, specifier: "%.2f") ⭐️")
-            if let date = anime.airDate {
+            if let date = anime.airTime {
                 Text(date)
             }
         }

@@ -17,7 +17,7 @@ class WeeklyAnime: Decodable {
     var saturday: [DayAnime]
     var sunday: [DayAnime]
     
-    func getCurrentDay(forDay day: String) -> [DayAnime]? {
+    func getCurrentDay(forDay day: String) -> [DayAnime] {
         if day.lowercased() == "monday" {
             return self.monday
         } else if day.lowercased() == "tuesday" {
@@ -41,7 +41,7 @@ class DayAnime: Decodable, ObservableObject, Identifiable {
     
     @Published var imageData: Data?
     @Published var day: String?
-    @Published var airDate: String?
+    @Published var airTime: String?
     
     var id: Int
     var url: String?
@@ -108,11 +108,9 @@ class DayAnime: Decodable, ObservableObject, Identifiable {
             
             let weekday = formatter.weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
             
-            let dayAndTime = weekday.prefix(3) + " " + time
-            
             DispatchQueue.main.async {
                 self.day = weekday
-                self.airDate = dayAndTime
+                self.airTime = time
             }
         } else {
             print("Failed to set date for \(title ?? "Some anime")")

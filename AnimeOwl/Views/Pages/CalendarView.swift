@@ -58,8 +58,8 @@ struct CalendarView: View {
                     ) {
                         // Picker Items
                         ForEach(DaysOfWeek.allCases, id: \.self) { day in
-                            Text(day.shortForm)
-                                .tag(day.shortForm)
+                            Text(day.title)
+                                .tag(day.title)
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
@@ -103,8 +103,8 @@ struct CalendarView: View {
         //            ) {
         //                // Picker Items
         //                ForEach(DaysOfWeek.allCases, id: \.self) { day in
-        //                    Text(day.shortForm)
-        //                        .tag(day.shortForm)
+        //                    Text(day.title)
+        //                        .tag(day.title)
         //                }
         //            }
         //            .pickerStyle(MenuPickerStyle()), alignment: .topTrailing)
