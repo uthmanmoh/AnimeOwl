@@ -39,72 +39,61 @@
 import Foundation
 
 struct TopAnimes: Decodable {
-    var top: [Anime]
+    var data: [Anime]
 }
 
 class Anime: Decodable, Identifiable, ObservableObject {
-    
-    @Published var imageData: Data?
-    
+
     var id: Int
     var url: String
-    var imageUrl: String?
+    var images: Images?
     var title: String
     var type: String
-    var score: Double
-    var startDate: String?
-    var endDate: String?
+    var score: Double?
     var members: Int
-    var rank: Int
-    var episodes: Int
+    var rank: Int?
+    var episodes: Int?
     
     enum CodingKeys: String, CodingKey {
         
         case id = "mal_id"
         case url
-        case imageUrl = "image_url"
+        case images
         case title
         case type
         case score
-        case startDate = "start_date"
-        case endDate = "end_date"
         case members
         case rank
         case episodes
         
     }
     
-    init(id: Int, url: String, imageUrl: String? = nil, title: String, type: String, score: Double,
-         startDate: String? = nil, endDate: String? = nil, members: Int, rank: Int, episodes: Int) {
+    init(id: Int, url: String, images: Images?, title: String, type: String, score: Double?,
+         members: Int, rank: Int?, episodes: Int?) {
         self.id = id
         self.url = url
-        self.imageUrl = imageUrl
+        self.images = images
         self.title = title
         self.type = type
         self.score = score
-        self.startDate = startDate
-        self.endDate = endDate
         self.members = members
         self.rank = rank
         self.episodes = episodes
-        
-        getImageData()
     }
+}
+
+struct Images: Decodable {
+    var jpg: ImageSizes
+}
+
+struct ImageSizes: Decodable {
+    var imageUrl: String
+    var smallImgUrl: String
+    var largeImgUrl: String
     
-    func getImageData() {
-        guard imageUrl != nil else { return }
-        
-        if let url = URL(string: imageUrl!) {
-            let session = URLSession.shared
-            session.dataTask(with: url) { (data, response, error) in
-                if error == nil, let data = data {
-                    DispatchQueue.main.async {
-                        self.imageData = data
-                    }
-                } else {
-                    print(error?.localizedDescription ?? "Error getting image data")
-                }
-            }.resume()
-        }
+    enum CodingKeys: String, CodingKey {
+        case imageUrl = "image_url"
+        case smallImgUrl = "small_image_url"
+        case largeImgUrl = "large_image_url"
     }
 }

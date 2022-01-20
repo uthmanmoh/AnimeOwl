@@ -22,28 +22,32 @@ struct AnimeCard: View {
     
     var body: some View {
         VStack {
-            let uiImage = UIImage(data: anime.imageData ?? Data())
-            Image(uiImage: uiImage ?? UIImage())
-                .resizable()
-                .aspectRatio(0.6466, contentMode: .fit)
-                .frame(height: 180)
-                .clipShape(RoundedRectangle(cornerRadius: 22))
-                .shadow(color: .black, radius: 15, x: 5, y: 5)
-                .onTapGesture {
-                    isDetailShowing = true
+            if #available(iOS 15.0, *) {
+                AsyncImage(url: URL(string: anime.images?.jpg.imageUrl ?? "")) { i in
+                    i.image?.resizable() ?? Image("").resizable()
                 }
-                .sheet(isPresented: $isDetailShowing, onDismiss: {
-                    model.resetDetailAnime()
-                }) {
-                    AnimeDetailView()
-                        .onAppear {
-                            model.getDetailAnime(id: anime.id)
-                        }
-                }
+                    .aspectRatio(0.6466, contentMode: .fit)
+                    .frame(height: 180)
+                    .clipShape(RoundedRectangle(cornerRadius: 22))
+                    .shadow(color: .black, radius: 15, x: 5, y: 5)
+                    .onTapGesture {
+                        isDetailShowing = true
+                    }
+                    .sheet(isPresented: $isDetailShowing, onDismiss: {
+                        model.resetDetailAnime()
+                    }) {
+                        AnimeDetailView()
+                            .onAppear {
+                                model.getDetailAnime(id: anime.id)
+                            }
+                    }
+            } else {
+                Rectangle()
+            }
             
             Text(anime.title)
                 .bold()
-            Text("\(anime.score, specifier: "%.2f") ⭐️")
+            Text("\(anime.score ?? 0, specifier: "%.2f") ⭐️")
         }
         .frame(height: 250)
     }

@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct WeeklyAnimeParser: Decodable {
+    var data: [DetailAnime]
+}
+
 class WeeklyAnime: Decodable {
     
     var monday: [DayAnime]

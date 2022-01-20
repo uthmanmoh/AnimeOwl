@@ -15,7 +15,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             BackgroundColour()
-            AnimeList(animes: model.topAnimes.top)
+            AnimeList(animes: model.topAnimes.data)
         }
         .navigationBarTitle("Top Anime") ////////////////////// TEMPORARY
         

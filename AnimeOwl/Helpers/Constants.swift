@@ -9,6 +9,6 @@ import Foundation
 
 struct Constants {
     
-    static let API_URL = "https://api.jikan.moe/v3"
+    static let API_URL = "https://api.jikan.moe/v4"
     
 }

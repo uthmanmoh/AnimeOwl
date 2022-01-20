@@ -7,46 +7,42 @@
 
 import Foundation
 
-class DetailAnime: Decodable, ObservableObject {
-    
-    @Published var imageData: Data?
+struct DetailAnimeParser: Decodable {
+    var data: DetailAnime
+}
+
+class DetailAnime: Decodable, ObservableObject, Identifiable {
     
     var id: Int
     var url: String
-    var imageUrl: String?
-    var trailerUrl: String?
+    var images: Images?
     var title: String
     var titleEnglish: String?
     var titleJapanese: String?
     var titleSynonyms: [String]
     var airing: Bool
-    var synopsis: String
+    var synopsis: String?
     var type: String
     var source: String
     var status: String
     var aired: Aired?
     var duration: String
     var rating: String
-    var score: Double
-    var scoredBy: Int
+    var score: Double?
+    var scoredBy: Int?
     var popularity: Int
     var favourites: Int
     var members: Int
-    var rank: Int
-    var episodes: Int
+    var rank: Int?
+    var episodes: Int?
     var background: String?
-    var premiered: String?
-    var broadcast: String?
-    var related: Related
-    var openingThemes: [String]?
-    var endingThemes: [String]?
+    var broadcast: Broadcast?
     
     enum CodingKeys: String, CodingKey {
         
         case id = "mal_id"
         case url
-        case imageUrl = "image_url"
-        case trailerUrl = "trailer_url"
+        case images
         case title
         case titleEnglish = "title_english"
         case titleJapanese = "title_japanese"
@@ -67,37 +63,50 @@ class DetailAnime: Decodable, ObservableObject {
         case rank
         case episodes
         case background
-        case premiered
         case broadcast
-        case related
-        case openingThemes = "opening_themes"
-        case endingThemes = "ending_themes"
         
     }
     
-    func getImageData() {
-        guard imageUrl != nil else { return }
-        
-        if let url = URL(string: imageUrl!) {
-            let session = URLSession.shared
-            session.dataTask(with: url) { (data, response, error) in
-                if error == nil, let data = data {
-                    DispatchQueue.main.async {
-                        self.imageData = data
-                    }
-                } else {
-                    print(error?.localizedDescription ?? "Error getting image data")
-                }
-            }.resume()
-        }
+    init(id: Int = 0, url: String = "", images: Images?, title: String = "", titleEnglish:String = "", titleJapanese: String = "", titleSynonyms: [String] = [], airing: Bool = false, synopsis: String = "", type: String = "", source: String = "", status: String = "", aired: Aired?, duration: String = "", rating: String = "", score: Double = 0, scoredBy: Int = 0, popularity: Int = 0, favourites: Int = 0, members: Int = 0, rank: Int = 0, episodes: Int = 0, background: String = "", broadcast: Broadcast?) {
+        self.id = id
+        self.url = url
+        self.images = images
+        self.title = title
+        self.titleEnglish = titleEnglish
+        self.titleJapanese = titleJapanese
+        self.titleSynonyms = titleSynonyms
+        self.airing = airing
+        self.synopsis = synopsis
+        self.type = type
+        self.source = source
+        self.status = status
+        self.aired = aired
+        self.duration = duration
+        self.rating = rating
+        self.score = score
+        self.scoredBy = scoredBy
+        self.popularity = popularity
+        self.favourites = favourites
+        self.members = members
+        self.rank = rank
+        self.episodes = episodes
+        self.background = background
+        self.broadcast = broadcast
     }
     
+}
+
+struct Broadcast: Decodable {
+    var day: String?
+    var time: String?
+    var timezone: String?
+    var string: String?
 }
 
 struct Aired: Decodable {
     
     var from: String
-    var to: String
+    var to: String?
     var prop: Prop
     var string: String
     
@@ -112,28 +121,9 @@ struct Prop: Decodable {
 
 struct SpecificDate: Decodable {
     
-    var day: Int
-    var month: Int
-    var year: Int
-    
-}
-
-struct Related: Decodable {
-    
-    var Adaptation: [AnimeBrief]?
-    var SideStory: [AnimeBrief]?
-    var Summary: [AnimeBrief]?
-    var producers: [AnimeBrief]?
-    var licensors: [AnimeBrief]?
-    var studios: [AnimeBrief]?
-    var genres: [AnimeBrief]?
-    
-    enum CodingKeys: String, CodingKey {
-        
-        case Adaptation
-        case SideStory = "Side story"
-        
-    }
+    var day: Int?
+    var month: Int?
+    var year: Int?
     
 }
 

@@ -60,7 +60,7 @@ struct SelectionView: View {
                         }
                     }
                 )
-            }
+             }
             .navigationViewStyle(StackNavigationViewStyle())
             .accentColor(Color(.brown))
             .offset(x: sideMenuOpened ? 300 : 0)

@@ -12,15 +12,15 @@ struct CalendarView: View {
     @EnvironmentObject var model: AnimeModel
     
     // Initialize at current date
-    @State private var pickerSelectedDay = String(DateFormatter()
-                                                    .weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1])
+    @State private var pickerSelectedDay = DateFormatter()
+                                                    .weekdaySymbols[Calendar.current.component(.weekday, from: Date()) - 1]
     
     @State private var tabSelection = 1
     
     init() {
         UITabBar.appearance().barTintColor = UIColor.init(Color("button"))
         UITabBar.appearance().unselectedItemTintColor = .systemGray
-        
+
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color(.brown))
     }
     
@@ -47,7 +47,7 @@ struct CalendarView: View {
                     .padding([.top, .horizontal])
                     
                     
-                    if let animes = model.weeklyAnime?.getCurrentDay(forDay: pickerSelectedDay) {
+                    if let animes = model.returnArrayBasedOn(day: pickerSelectedDay) {
                         CalendarListView(animes: animes)
                     } else {
                         ProgressView()
@@ -68,6 +68,7 @@ struct CalendarView: View {
             
             ZStack {
                 BackgroundColour()
+                // TODO: Update to upcoming animes
                 if let animes = model.upcomingAnimes {
                     CalendarListView(animes: animes)
                 } else {

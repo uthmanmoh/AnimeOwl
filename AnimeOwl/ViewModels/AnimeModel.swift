@@ -11,16 +11,23 @@ import Firebase
 class AnimeModel: ObservableObject {
     
     // Anime info
-    @Published var topAnimes: TopAnimes = TopAnimes(top: [Anime]())
+    @Published var topAnimes: TopAnimes = TopAnimes(data: [Anime]())
     @Published var followingAnimes: [Anime] = [Anime]()
     
     @Published var detailAnime: DetailAnime?
     
     @Published var isFollowingAnime = false
     
-    @Published var weeklyAnime: WeeklyAnime?
     
-    @Published var upcomingAnimes: [DayAnime]?
+    @Published var mondayAnime: [DetailAnime] = [DetailAnime]()
+    @Published var tuesdayAnime: [DetailAnime] = [DetailAnime]()
+    @Published var wednesdayAnime: [DetailAnime] = [DetailAnime]()
+    @Published var thursdayAnime: [DetailAnime] = [DetailAnime]()
+    @Published var fridayAnime: [DetailAnime] = [DetailAnime]()
+    @Published var saturdayAnime: [DetailAnime] = [DetailAnime]()
+    @Published var sundayAnime: [DetailAnime] = [DetailAnime]()
+    
+    @Published var upcomingAnimes: [DetailAnime] = [DetailAnime]()
     
     // User info
     @Published var loggedIn = false
@@ -32,7 +39,7 @@ class AnimeModel: ObservableObject {
     // MARK: - Anime Data Methods
     func getTopAnime() {
         
-        let url = URL(string: "\(Constants.API_URL)/top/anime/1")!
+        let url = URL(string: "\(Constants.API_URL)/top/anime")!
         //let url = URL(string: "\(Constants.API_URL)/search/anime?q=Shingekipage=1")!
         //let url = URL(string: "\(Constants.API_URL)/schedule/monday")!
         //let url = URL(string: "\(Constants.API_URL)/top/anime/1/movie")!
@@ -46,15 +53,11 @@ class AnimeModel: ObservableObject {
                 do {
                     let result = try JSONDecoder().decode(TopAnimes.self, from: data)
                     
-                    for anime in result.top {
-                        anime.getImageData()
-                    }
-                    
                     DispatchQueue.main.async {
                         self.topAnimes = result
                     }
                 } catch {
-                    print(error.localizedDescription)
+                    print(error)
                 }
                 
             } else {
@@ -77,18 +80,16 @@ class AnimeModel: ObservableObject {
             if error == nil, let data = data {
                 
                 do {
-                    let result = try JSONDecoder().decode(DetailAnime.self, from: data)
-                    
-                    result.getImageData()
+                    let result = try JSONDecoder().decode(DetailAnimeParser.self, from: data)
                     
                     DispatchQueue.main.async {
-                        self.detailAnime = result
+                        self.detailAnime = result.data
                         self.checkFollowing(anime: self.detailAnime!)
                     }
                     
                     
                 } catch {
-                    print(error.localizedDescription)
+                    print(error)
                 }
                 
             } else {
@@ -102,7 +103,7 @@ class AnimeModel: ObservableObject {
     
     func getWeekdayAnime() {
         
-        let url = URL(string: "\(Constants.API_URL)/schedule/")!
+        let url = URL(string: "\(Constants.API_URL)/schedules")!
         
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
         request.httpMethod = "GET"
@@ -111,26 +112,16 @@ class AnimeModel: ObservableObject {
             if error == nil, let data = data {
                 
                 do {
-                    let result = try JSONDecoder().decode(WeeklyAnime.self, from: data)
-                    
-                    for eachDay in DaysOfWeek.allCases {
-                        for anime in result.getCurrentDay(forDay: eachDay.title) {
-                            anime.getImageData()
-                            anime.getAirDate()
-                        }
-                    }
+                    let result = try JSONDecoder().decode(WeeklyAnimeParser.self, from: data)
                     
                     DispatchQueue.main.async {
-                        self.weeklyAnime = result
-//                        print("BEFORE FIXINGF WEEKLY ANIME: \(self.weeklyAnime!.monday.count + self.weeklyAnime!.tuesday.count + self.weeklyAnime!.wednesday.count + self.weeklyAnime!.thursday.count + self.weeklyAnime!.friday.count + self.weeklyAnime!.saturday.count + self.weeklyAnime!.sunday.count)")
-                        self.fixWeeklyAnimes()
-//                        print("AFTERRR FIXINGF WEEKLY ANIME: \(self.weeklyAnime!.monday.count + self.weeklyAnime!.tuesday.count + self.weeklyAnime!.wednesday.count + self.weeklyAnime!.thursday.count + self.weeklyAnime!.friday.count + self.weeklyAnime!.saturday.count + self.weeklyAnime!.sunday.count)")
-                        self.setUpcomingAnimes()
+                        self.addToCorrectArray(arr: result.data)
+                        self.setUpcomingAnimes(result.data)
                     }
                     
+                    
                 } catch {
-                    print(error.localizedDescription)
-                    print(error as Any)
+                    print(error)
                 }
                 
             } else {
@@ -142,134 +133,50 @@ class AnimeModel: ObservableObject {
         
     }
     
-    func fixWeeklyAnimes() {
+    func addToCorrectArray(arr: [DetailAnime]) {
         
-        for anime in self.weeklyAnime!.monday {
-            if let curDay = anime.day?.lowercased() {
-                if curDay != "monday" {
-                    
-                    let index = self.weeklyAnime!.monday.firstIndex(where: {$0 === anime})
-                    self.weeklyAnime!.monday.remove(at: index!)
-                    
-                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
-                    
-                }
-            }
-        }
-        
-        weeklyAnime!.monday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
-        
-        for anime in self.weeklyAnime!.tuesday {
-            if let curDay = anime.day?.lowercased() {
-                if curDay != "tuesday" {
-                    
-                    let index = self.weeklyAnime!.tuesday.firstIndex(where: {$0 === anime})
-                    self.weeklyAnime!.tuesday.remove(at: index!)
-                    
-                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
-                    
-                }
-            }
-        }
-        
-        weeklyAnime!.tuesday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
-        
-        for anime in self.weeklyAnime!.wednesday {
-            if let curDay = anime.day?.lowercased() {
-                if curDay != "wednesday" {
-                    
-                    let index = self.weeklyAnime!.wednesday.firstIndex(where: {$0 === anime})
-                    self.weeklyAnime!.wednesday.remove(at: index!)
-                    
-                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
-                    
-                }
-            }
-        }
-        
-        weeklyAnime!.wednesday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
-        
-        for anime in self.weeklyAnime!.thursday {
-            if let curDay = anime.day?.lowercased() {
-                if curDay != "thursday" {
-                    
-                    let index = self.weeklyAnime!.thursday.firstIndex(where: {$0 === anime})
-                    self.weeklyAnime!.thursday.remove(at: index!)
-                    
-                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
-                    
-                }
-            }
-        }
-        
-        weeklyAnime!.thursday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
-        
-        for anime in self.weeklyAnime!.friday {
-            if let curDay = anime.day?.lowercased() {
-                if curDay != "friday" {
-                    
-                    let index = self.weeklyAnime!.friday.firstIndex(where: {$0 === anime})
-                    self.weeklyAnime!.friday.remove(at: index!)
-                    
-                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
-                    
-                }
-            }
-        }
-        
-        weeklyAnime!.friday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
-        
-        for anime in self.weeklyAnime!.saturday {
-            if let curDay = anime.day?.lowercased() {
-                if curDay != "saturday" {
-                    
-                    let index = self.weeklyAnime!.saturday.firstIndex(where: {$0 === anime})
-                    self.weeklyAnime!.saturday.remove(at: index!)
-                    
-                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
-                    
-                }
-            }
-        }
-        
-        weeklyAnime!.saturday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
-        
-        for anime in self.weeklyAnime!.sunday {
-            if let curDay = anime.day?.lowercased() {
-                if curDay != "sunday" {
-                    
-                    let index = self.weeklyAnime!.sunday.firstIndex(where: {$0 === anime})
-                    self.weeklyAnime!.sunday.remove(at: index!)
-                    
-                    addToCorrectArray(arr: self.weeklyAnime!, anime: anime, curDay: curDay)
-                    
-                }
+        for anime in arr {
+            if anime.broadcast == nil {
+                continue
+            } else if anime.broadcast!.day == nil {
+                continue
             }
             
+            if anime.broadcast!.day!.lowercased().contains("monday") {
+                self.mondayAnime.append(anime)
+            } else if anime.broadcast!.day!.lowercased().contains("tuesday") {
+                self.tuesdayAnime.append(anime)
+            } else if anime.broadcast!.day!.lowercased().contains("wednesday") {
+                self.wednesdayAnime.append(anime)
+            } else if anime.broadcast!.day!.lowercased().contains("thursday") {
+                self.thursdayAnime.append(anime)
+            } else if anime.broadcast!.day!.lowercased().contains("friday") {
+                self.fridayAnime.append(anime)
+            } else if anime.broadcast!.day!.lowercased().contains("saturday") {
+                self.saturdayAnime.append(anime)
+            } else {
+                self.sundayAnime.append(anime)
+            }
         }
-        
-        weeklyAnime!.sunday.sort(by: {$0.score ?? 0 > $1.score ?? 0} )
         
     }
     
-    func addToCorrectArray(arr: WeeklyAnime, anime: DayAnime, curDay: String) {
-        
-        if curDay == "monday" {
-            arr.monday.append(anime)
-        } else if curDay == "tuesday" {
-            arr.tuesday.append(anime)
-        } else if curDay == "wednesday" {
-            arr.wednesday.append(anime)
-        } else if curDay == "thursday" {
-            arr.thursday.append(anime)
-        } else if curDay == "friday" {
-            arr.friday.append(anime)
-        } else if curDay == "saturday" {
-            arr.saturday.append(anime)
-        } else if curDay == "sunday" {
-            arr.sunday.append(anime)
+    func returnArrayBasedOn(day: String) -> [DetailAnime]? {
+        if day.lowercased() == "monday" {
+            return mondayAnime
+        } else if day.lowercased() == "tuesday" {
+            return tuesdayAnime
+        } else if day.lowercased() == "wednesday" {
+            return wednesdayAnime
+        } else if day.lowercased() == "thursday" {
+            return thursdayAnime
+        } else if day.lowercased() == "friday" {
+            return fridayAnime
+        } else if day.lowercased() == "saturday" {
+            return saturdayAnime
+        } else {
+            return sundayAnime
         }
-        
     }
     
     func resetDetailAnime() {
@@ -278,28 +185,16 @@ class AnimeModel: ObservableObject {
         }
     }
     
-    func setUpcomingAnimes() {
-        
-        guard self.weeklyAnime != nil else { return }
-        
-        self.upcomingAnimes = [DayAnime]()
-        var count = 0
-        outerloop: for eachDay in DaysOfWeek.allCases {
-            for anime in self.weeklyAnime!.getCurrentDay(forDay: eachDay.title) {
-                self.upcomingAnimes?.append(anime)
-                count += 1
-                if count > 10 { break outerloop }
+    func setUpcomingAnimes(_ array: [DetailAnime]) {
+        // TODO: Fix error with upcoming animes not getting appended anything
+        for anime in array {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let animeDate = dateFormatter.date(from: anime.aired?.from ?? "2999-12-31")
+            if let animeDate = animeDate, let aired = anime.aired, animeDate > Date() || aired.from == "" {
+                upcomingAnimes.append(anime)
             }
-        }
-        
-        self.upcomingAnimes!.sort { first, second in
-            // Fix this sorting algorithm
-            let now = Date()
-            if let firstDate = first.date, let secondDate = second.date {
-                return firstDate.distance(to: now) < secondDate.distance(to: now)
-            } else {
-                return false
-            }
+                
         }
         
     }
@@ -334,7 +229,7 @@ class AnimeModel: ObservableObject {
         let reference = db.collection("users").document(Auth.auth().currentUser!.uid)
         reference.getDocument { snapshot, error in
             guard error == nil, snapshot != nil else {
-                print(error?.localizedDescription ?? "Error getting document")
+                print(error!.localizedDescription)
                 return
             }
             
@@ -347,15 +242,13 @@ class AnimeModel: ObservableObject {
                 for a in databaseInfo {
                     let newAnime = Anime(id: a["id"] as! Int,
                                          url: a["url"] as! String,
-                                         imageUrl: a["imageUrl"] as? String? ?? nil,
+                                         images: a["images"] as! Images?,
                                          title: a["title"] as! String,
                                          type: a["type"] as! String,
-                                         score: a["score"] as! Double,
-                                         startDate: a["startDate"] as? String? ?? nil,
-                                         endDate: a["endDate"] as? String? ?? nil,
+                                         score: a["score"] as? Double,
                                          members: a["members"] as! Int,
-                                         rank: a["rank"] as! Int,
-                                         episodes: a["episodes"] as! Int)
+                                         rank: a["rank"] as? Int,
+                                         episodes: a["episodes"] as? Int)
                     
                     self.user.followingAnimes.append(newAnime)
                 }
@@ -373,7 +266,7 @@ class AnimeModel: ObservableObject {
             
             var animesArray = [[String: Any]]()
             for anime in user.followingAnimes {
-                animesArray.append(["id": anime.id, "url": anime.url, "imageUrl": anime.imageUrl as Any, "title": anime.title, "type": anime.type, "score": anime.score, "startDate": anime.startDate as Any, "endDate": anime.endDate as Any, "members": anime.members, "rank": anime.rank, "episodes": anime.episodes])
+                animesArray.append(["id": anime.id, "url": anime.url, "imageUrl": anime.images as Any, "title": anime.title, "type": anime.type, "score": anime.score as Any as Any, "members": anime.members, "rank": anime.rank as Any, "episodes": anime.episodes ?? 0])
             }
             
             reference.updateData(["followingAnimes": FieldValue.delete()]) { error in
@@ -397,7 +290,7 @@ class AnimeModel: ObservableObject {
             eachAnime.id == anime.id
         }) && isFollowingAnime {
             
-            let toFollowAnimes = Anime(id: anime.id, url: anime.url, imageUrl: anime.imageUrl, title: anime.title, type: anime.type, score: anime.score, members: anime.members, rank: anime.rank, episodes: anime.episodes)
+            let toFollowAnimes = Anime(id: anime.id, url: anime.url, images: anime.images, title: anime.title, type: anime.type, score: anime.score, members: anime.members, rank: anime.rank, episodes: anime.episodes)
             user.followingAnimes.append(toFollowAnimes)
         } else {
             

@@ -18,10 +18,11 @@ struct AnimeDetailView: View {
             ZStack (alignment: .top) {
                 BackgroundColour()
                 
-                let uiImage = UIImage(data: anime.imageData ?? Data())
                 VStack {
-                    Image(uiImage: uiImage ?? UIImage())
-                        .resizable()
+                    if #available(iOS 15.0, *) {
+                        AsyncImage(url: URL(string: anime.images?.jpg.largeImgUrl ?? "")) { i in
+                            i.image?.resizable() ?? Image("").resizable()
+                        }
                         .scaledToFill()
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
                         .clipShape(RoundedRectangle(cornerRadius: 25.0))
@@ -39,6 +40,9 @@ struct AnimeDetailView: View {
                                 .padding(.bottom, 3)
                                 .padding(.horizontal, 30)
                             , alignment: .bottom)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                     
                     
                     
@@ -48,7 +52,7 @@ struct AnimeDetailView: View {
                                 .bold()
                                 .frame(maxWidth: 100, alignment: .leading)
                                 .multilineTextAlignment(.leading)
-                            Text("#\(anime.rank)")
+                            Text("#\(anime.rank ?? 0)")
                         }
                         .padding(5)
                         
@@ -57,7 +61,7 @@ struct AnimeDetailView: View {
                                 .bold()
                                 .frame(maxWidth: 100, alignment: .leading)
                                 .multilineTextAlignment(.leading)
-                            Text("\(anime.episodes)")
+                            Text("\(anime.episodes ?? 0)")
                         }
                         .padding(5)
                         
@@ -66,7 +70,7 @@ struct AnimeDetailView: View {
                                 .bold()
                                 .frame(maxWidth: 100, alignment: .leading)
                                 .multilineTextAlignment(.leading)
-                            Text(anime.synopsis)
+                            Text(anime.synopsis ?? "")
                                 .lineLimit(4)
                         }
                         .padding(5)

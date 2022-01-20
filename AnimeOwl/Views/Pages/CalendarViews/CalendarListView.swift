@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarListView: View {
     @EnvironmentObject var model: AnimeModel
     
-    var animes: [DayAnime]
+    var animes: [DetailAnime]
     
     private let gridItems = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
